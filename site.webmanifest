@@ -1,0 +1,21 @@
+{
+  "name": "LuxeCeylon Bespoke Journeys",
+  "short_name": "LuxeCeylon",
+  "description": "Prestigious private Sri Lanka tours, airport transfers, and luxury holiday packages.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07131a",
+  "theme_color": "#07131a",
+  "icons": [
+    {
+      "src": "logo.PNG",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.PNG",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
