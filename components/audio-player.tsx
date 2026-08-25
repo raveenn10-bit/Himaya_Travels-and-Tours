@@ -21,7 +21,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Create audio instance once on mount
-    const audio = new Audio("/Assets/Sound.wav");
+    const audio = new Audio("/Assets/Sound.mp3");
     audio.loop = true;
     audio.volume = 0.35;
     audio.preload = "auto";
@@ -90,7 +90,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   const toggleSound = useCallback(() => {
     userInteractedRef.current = true;
     if (!audioRef.current) {
-      const audio = new Audio("/Assets/Sound.wav");
+      const audio = new Audio("/Assets/Sound.mp3");
       audio.loop = true;
       audio.volume = 0.35;
       audioRef.current = audio;
