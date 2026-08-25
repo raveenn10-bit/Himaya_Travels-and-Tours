@@ -91,16 +91,16 @@ export default function WhyChooseUs() {
             </div>
           </ScrollFade>
 
-          {/* Right Column: 4-Photo Asymmetrical Collage Grid with Genuine Sri Lanka Photos */}
+          {/* Right Column: 4-Photo Collage with User Uploaded Sri Lanka Images */}
           <ScrollFade direction="left" className="lg:col-span-6">
             <div className="grid grid-cols-12 gap-4">
               {/* Left Column of Collage (Photos 1 & 2) */}
               <div className="col-span-6 space-y-4">
-                {/* 1. Cultural Heritage: Sigiriya Lion Rock Fortress */}
+                {/* 1. Cultural Heritage: Kandy Esala Perahera */}
                 <div className="relative h-44 sm:h-52 rounded-2xl overflow-hidden shadow-lg border border-[#A7C4A0]/40 group">
                   <Image
-                    src="/Assets/Sigiriya rock fortress Lion Rock Ceylon.jpg"
-                    alt="Sigiriya Rock Fortress UNESCO Citadel Sri Lanka"
+                    src="/Assets/kandy-perahera.jpg"
+                    alt="Kandy Esala Perahera Temple of the Tooth Festival Sri Lanka"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700 filter brightness-95"
                   />
@@ -110,11 +110,11 @@ export default function WhyChooseUs() {
                   </span>
                 </div>
 
-                {/* 2. Authentic Flavors: Traditional Ceylon Hopper & Curry Feast */}
+                {/* 2. Authentic Flavors: Traditional Sri Lankan Hoppers, Rotis & Curries */}
                 <div className="relative h-64 sm:h-76 rounded-2xl overflow-hidden shadow-lg border border-[#A7C4A0]/40 group">
                   <Image
-                    src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?q=80&w=800&auto=format&fit=crop"
-                    alt="Traditional Sri Lankan Culinary Curry & Clay Pot Feast"
+                    src="/Assets/sri-lankan-cuisine.jpg"
+                    alt="Authentic Sri Lankan Cuisine with Plain and Egg Hoppers, Pol Roti and Curries"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
@@ -127,11 +127,11 @@ export default function WhyChooseUs() {
 
               {/* Right Column of Collage (Photos 3 & 4) */}
               <div className="col-span-6 space-y-4">
-                {/* 3. Misty Highlands: Ella Nine Arch Bridge & Tea Hills */}
+                {/* 3. Misty Highlands: Cliff Viewpoint over Mountain Valley */}
                 <div className="relative h-64 sm:h-76 rounded-2xl overflow-hidden shadow-lg border border-[#A7C4A0]/40 group">
                   <Image
-                    src="https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=800&auto=format&fit=crop"
-                    alt="Ella Nine Arch Bridge & Misty Tea Plantations Sri Lanka"
+                    src="/Assets/misty-highlands-cliff.jpg"
+                    alt="Traveler sitting on Mountain Cliff overlooking lush Green Ceylon Valleys"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
@@ -141,11 +141,11 @@ export default function WhyChooseUs() {
                   </span>
                 </div>
 
-                {/* 4. Golden Coastline: Mirissa Coconut Tree Hill & Galle Shore */}
+                {/* 4. Golden Coastline: Sri Lankan Stilt Fishermen at Sunset */}
                 <div className="relative h-44 sm:h-52 rounded-2xl overflow-hidden shadow-lg border border-[#A7C4A0]/40 group">
                   <Image
-                    src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop"
-                    alt="Mirissa Palm Coastline and Galle Fort Sri Lanka"
+                    src="/Assets/stilt-fishermen-sunset.jpg"
+                    alt="Sri Lankan Stilt Fishermen along the Southern Coast at Sunset"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
