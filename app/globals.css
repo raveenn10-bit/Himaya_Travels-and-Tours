@@ -2,6 +2,7 @@
 
 @layer base {
   :root {
+    /* Palette Tokens: 01 Eucalyptus Glow & Heritage Forest */
     --color-white: #ffffff;
     --color-linen: #F4EFE6;
     --color-cream: #F9F7F2;
@@ -15,8 +16,10 @@
     --color-gold: #c5a880;
     --color-gold-hover: #b3976f;
 
-    --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
-    --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Luxury Typography Tokens */
+    --font-serif: var(--font-cormorant), "Cormorant Garamond", Garamond, Georgia, serif;
+    --font-sans: var(--font-jakarta), "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-cinzel: var(--font-cinzel), "Cinzel", Georgia, serif;
   }
 
   * {
@@ -30,29 +33,91 @@
     overflow-x: hidden;
     background-color: var(--color-linen);
     color: var(--color-charcoal);
+    font-size: 16px;
   }
 
   body {
     font-family: var(--font-sans);
     background-color: var(--color-linen);
     color: var(--color-charcoal);
-    line-height: 1.6;
-    font-size: 16px;
+    line-height: 1.65;
+    font-size: 1rem;
     font-weight: 400;
+    letter-spacing: -0.011em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  /* Luxury Display & Heading Hierarchy */
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
     font-family: var(--font-serif);
     font-weight: 600;
     line-height: 1.2;
+    letter-spacing: -0.015em;
   }
+
+  h4 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+}
+
+/* Luxury Editorial Typography Classes */
+.font-cinzel {
+  font-family: var(--font-cinzel);
+}
+
+.font-serif-luxury {
+  font-family: var(--font-serif);
+}
+
+.font-sans-body {
+  font-family: var(--font-sans);
+}
+
+.kicker-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  line-height: 1.2;
+}
+
+.btn-typography {
+  font-family: var(--font-sans);
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
 }
 
 /* Eucalyptus Glow Gradient Accents */
 .bg-eucalyptus-glow {
-  background: linear-gradient(135deg, #F4EFE6 0%, #A7C4A0 50%, #7D9D75 100%);
+  background: linear-gradient(135deg, #F4EFE6 0%, #A7C4A0 50%, #6C8A66 100%);
 }
 
 .bg-eucalyptus-subtle {

@@ -1,45 +1,75 @@
-﻿"use client";
+"use client";
 
 import React from "react";
-import { Warp } from "@paper-design/shaders-react";
-import { Plane, Compass, MapPin, Briefcase, Heart, Luggage, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Plane, Compass, MapPin, Briefcase, Heart, Luggage, ArrowRight, Sparkles, Check } from "lucide-react";
+import { ScrollFade } from "@/components/ui/motion-wrapper";
 
-interface Feature {
+interface ServiceFeature {
   title: string;
+  subtitle: string;
   description: string;
+  image: string;
   icon: React.ReactNode;
+  tags: string[];
+  rateHint: string;
 }
 
-const features: Feature[] = [
+const servicesData: ServiceFeature[] = [
   {
     title: "VIP Airport Transfers",
-    description: "Prompt airport meet-and-greet concierge services at BIA Colombo and Mattala airport.",
-    icon: <Plane className="w-6 h-6 text-white" />,
+    subtitle: "Colombo (CMB) & Mattala (HRI)",
+    description: "Flight-tracked meet & greet inside the arrival terminal. Dedicated private chauffeur with luggage assistance and direct express highway transit to your resort.",
+    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop",
+    icon: <Plane className="w-5 h-5 text-[#103322]" />,
+    tags: ["Flight Tracking", "Highway Tolls Included", "Chilled Bottled Water"],
+    rateHint: "From $45 Flat",
   },
   {
-    title: "Multi-Day Expeditions",
-    description: "Tailor-made itineraries mapping the wild parks, tea trails, and surfing coasts.",
-    icon: <Compass className="w-6 h-6 text-white" />,
+    title: "Multi-Day Island Expeditions",
+    subtitle: "Cultural Triangle, Highlands & Coast",
+    description: "Bespoke continuous chauffeur service across all 9 provinces. Travel at your rhythm with complete flexibility for unscheduled scenic detours.",
+    image: "https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=800&auto=format&fit=crop",
+    icon: <Compass className="w-5 h-5 text-[#103322]" />,
+    tags: ["Unlimited Kilometers", "Driver Lodging Handled", "24/7 Concierge"],
+    rateHint: "From $55 / Day",
   },
   {
-    title: "Regional Day Trips",
-    description: "Curated full-day passages exploring colonial Fort Galle, Kandy temples, or tea mills.",
-    icon: <MapPin className="w-6 h-6 text-white" />,
+    title: "Colonial & Heritage Day Trips",
+    subtitle: "Galle Fort, Sigiriya Citadel & Kandy",
+    description: "Immersive single-day guided excursions exploring UNESCO fortresses, ancient cave temples, highland tea factories, or river boat safaris.",
+    image: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?q=80&w=800&auto=format&fit=crop",
+    icon: <MapPin className="w-5 h-5 text-[#103322]" />,
+    tags: ["Certified Guide", "Custom Pace", "Round-Trip Return"],
+    rateHint: "From $40 / Trip",
   },
   {
-    title: "Executive Chauffeur",
-    description: "Punctual transport solutions for diplomats, corporate visitors, and event organizers.",
-    icon: <Briefcase className="w-6 h-6 text-white" />,
+    title: "Executive & Diplomatic Chauffeur",
+    subtitle: "Corporate, Business & VIP Missions",
+    description: "Impeccable discreet transport for business leaders, foreign delegations, and film crews. Spotless prestige vehicles with Wi-Fi and mobile charging hubs.",
+    image: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=800&auto=format&fit=crop",
+    icon: <Briefcase className="w-5 h-5 text-[#103322]" />,
+    tags: ["4G Wi-Fi Onboard", "Discreet & Punctual", "Bilingual Chauffeur"],
+    rateHint: "Executive Rates",
   },
   {
-    title: "Bespoke Celebrations",
-    description: "Immaculately presented vehicles and customized hosts for luxury weddings and events.",
-    icon: <Heart className="w-6 h-6 text-white" />,
+    title: "Bespoke Celebrations & Weddings",
+    subtitle: "Weddings, Honeymoons & Anniversaries",
+    description: "Elegantly presented luxury vehicles and coordinated guest fleet logistics for tropical destination weddings and milestone celebrations.",
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
+    icon: <Heart className="w-5 h-5 text-[#103322]" />,
+    tags: ["Decorated Vehicles", "Group Fleet Coordination", "VIP Hospitality"],
+    rateHint: "Bespoke Packages",
   },
   {
-    title: "Concierge Luggage Transit",
-    description: "Secure vehicles dedicated to oversized boards, golf kits, and production cameras.",
-    icon: <Luggage className="w-6 h-6 text-white" />,
+    title: "Surf & Concierge Gear Transit",
+    subtitle: "Surfboards, Golf Bags & Heavy Cargo",
+    description: "Specialized high-roof cruiser vans fitted with surfboard mounts and expansive cargo space to transit your boards, photography gear, or golf clubs safely.",
+    image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&auto=format&fit=crop",
+    icon: <Luggage className="w-5 h-5 text-[#103322]" />,
+    tags: ["Surfboard Mounts", "Oversized Luggage", "Coastal Passages"],
+    rateHint: "From $65 / Day",
   },
 ];
 
@@ -58,138 +88,111 @@ export default function ServicesShaderCards({
     }
   };
 
-  const getShaderConfig = (index: number) => {
-    const configs = [
-      {
-        proportion: 0.3,
-        softness: 0.8,
-        distortion: 0.15,
-        swirl: 0.6,
-        swirlIterations: 8,
-        shape: "checks" as const,
-        shapeScale: 0.08,
-        colors: ["hsl(280, 100%, 30%)", "hsl(320, 100%, 60%)", "hsl(340, 90%, 40%)", "hsl(300, 100%, 70%)"],
-      },
-      {
-        proportion: 0.4,
-        softness: 1.2,
-        distortion: 0.2,
-        swirl: 0.9,
-        swirlIterations: 12,
-        shape: "stripes" as const,
-        shapeScale: 0.12,
-        colors: ["hsl(200, 100%, 25%)", "hsl(180, 100%, 65%)", "hsl(160, 90%, 35%)", "hsl(190, 100%, 75%)"],
-      },
-      {
-        proportion: 0.35,
-        softness: 0.9,
-        distortion: 0.18,
-        swirl: 0.7,
-        swirlIterations: 10,
-        shape: "checks" as const,
-        shapeScale: 0.1,
-        colors: ["hsl(120, 100%, 25%)", "hsl(140, 100%, 60%)", "hsl(100, 90%, 30%)", "hsl(130, 100%, 70%)"],
-      },
-      {
-        proportion: 0.45,
-        softness: 1.1,
-        distortion: 0.22,
-        swirl: 0.8,
-        swirlIterations: 15,
-        shape: "edge" as const,
-        shapeScale: 0.09,
-        colors: ["hsl(30, 100%, 35%)", "hsl(50, 100%, 65%)", "hsl(40, 90%, 40%)", "hsl(45, 100%, 75%)"],
-      },
-      {
-        proportion: 0.38,
-        softness: 0.95,
-        distortion: 0.16,
-        swirl: 0.85,
-        swirlIterations: 11,
-        shape: "checks" as const,
-        shapeScale: 0.11,
-        colors: ["hsl(250, 100%, 30%)", "hsl(270, 100%, 65%)", "hsl(260, 90%, 35%)", "hsl(265, 100%, 70%)"],
-      },
-      {
-        proportion: 0.42,
-        softness: 1.0,
-        distortion: 0.19,
-        swirl: 0.75,
-        swirlIterations: 9,
-        shape: "stripes" as const,
-        shapeScale: 0.13,
-        colors: ["hsl(330, 100%, 30%)", "hsl(350, 100%, 60%)", "hsl(340, 90%, 35%)", "hsl(345, 100%, 75%)"],
-      },
-    ];
-    return configs[index % configs.length];
-  };
-
   return (
-    <section className="py-24 bg-[#121614] border-b border-white/5 relative overflow-hidden" id="services">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16">
-          <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#c5a880] block mb-3 font-sans">
-            Premium Modules
-          </span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-white tracking-tight">
-            Bespoke Service Offerings
-          </h2>
-          <p className="mt-4 text-base sm:text-lg text-gray-400 leading-relaxed font-sans">
-            Fully customizable private transits designed to meet the highest expectations of luxury and timing.
-          </p>
-        </div>
+    <section className="py-24 bg-[#F4EFE6] border-b border-[#A7C4A0]/30 relative overflow-hidden" id="services">
+      {/* Background Subtle Eucalyptus Accents */}
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#A7C4A0]/10 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-[#103322]/5 blur-3xl pointer-events-none" />
 
-        {/* Shader Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => {
-            const shaderConfig = getShaderConfig(index);
-            return (
-              <div
-                key={index}
-                className="relative h-80 rounded-3xl overflow-hidden cursor-pointer group shadow-xl transition-all duration-300 hover:-translate-y-1.5"
-                onClick={() => handleCardClick(feature.title, feature.description)}
-              >
-                {/* Background Warp Shader */}
-                <div className="absolute inset-0">
-                  <Warp
-                    style={{ height: "100%", width: "100%" }}
-                    proportion={shaderConfig.proportion}
-                    softness={shaderConfig.softness}
-                    distortion={shaderConfig.distortion}
-                    swirl={shaderConfig.swirl}
-                    swirlIterations={shaderConfig.swirlIterations}
-                    shape={shaderConfig.shape}
-                    shapeScale={shaderConfig.shapeScale}
-                    scale={1}
-                    rotation={0}
-                    speed={0.8}
-                    colors={shaderConfig.colors}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header with Scroll Fade */}
+        <ScrollFade direction="up" className="flex flex-col md:flex-row md:items-end justify-between mb-16">
+          <div className="max-w-2xl">
+            <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#6C8A66] block mb-3 font-sans">
+              Bespoke Transit Capabilities
+            </span>
+            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+              Curated Chauffeur Offerings
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans font-light">
+              Fully customizable private chauffeur services tailored to the highest standards of safety, comfort, and punctual luxury.
+            </p>
+          </div>
+
+          <div className="mt-6 md:mt-0 font-sans">
+            <a
+              href="https://wa.me/94767885107"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#103322] hover:bg-[#A7C4A0] hover:text-[#103322] text-[#F4EFE6] text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-md"
+            >
+              <span>Custom Service Inquiry</span>
+              <ArrowRight size={14} />
+            </a>
+          </div>
+        </ScrollFade>
+
+        {/* 6 Elegant Luxury Bento Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {servicesData.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+              className="group rounded-3xl overflow-hidden bg-white border border-[#A7C4A0]/30 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+              onClick={() => handleCardClick(service.title, service.description)}
+            >
+              <div>
+                {/* Visual Header with Image & Overlay */}
+                <div className="relative h-48 w-full overflow-hidden bg-[#121614]">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-108 filter brightness-[0.75]"
                   />
-                </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-                {/* Dark Overlay with content */}
-                <div className="relative z-10 p-8 h-full flex flex-col justify-between bg-black/75 border border-white/10 group-hover:bg-black/60 group-hover:border-white/25 transition-all duration-300">
-                  <div>
-                    <div className="mb-5 inline-block p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-300 shadow-inner">
-                      {feature.icon}
+                  {/* Icon & Rate Tag */}
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                    <div className="w-10 h-10 rounded-2xl bg-[#F4EFE6] shadow-md flex items-center justify-center border border-[#A7C4A0]/50 group-hover:scale-110 transition-transform">
+                      {service.icon}
                     </div>
-                    <h3 className="text-2xl font-serif font-semibold mb-2.5 text-white tracking-wide">
-                      {feature.title}
-                    </h3>
-                    <p className="leading-relaxed text-gray-300 group-hover:text-white transition-colors duration-300 font-sans text-xs sm:text-sm">
-                      {feature.description}
-                    </p>
+                    <span className="px-3 py-1 rounded-full bg-[#103322]/90 backdrop-blur-md text-[#A7C4A0] text-xs font-bold font-sans border border-[#A7C4A0]/30 shadow-sm">
+                      {service.rateHint}
+                    </span>
                   </div>
 
-                  <div className="mt-4 flex items-center text-xs font-semibold uppercase tracking-wider text-[#c5a880] group-hover:text-[#e2a829] transition-colors duration-300">
-                    <span className="mr-2">Inquire Now</span>
-                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300" />
+                  {/* Bottom Image Subtitle */}
+                  <div className="absolute bottom-3 left-4 right-4 z-10">
+                    <span className="text-[11px] font-sans font-semibold text-[#A7C4A0] uppercase tracking-wider block">
+                      {service.subtitle}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content Body */}
+                <div className="p-6 sm:p-7 space-y-4 font-sans">
+                  <h3 className="font-serif text-2xl font-bold text-[#103322] group-hover:text-[#6C8A66] transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs text-[#4e6359] leading-relaxed font-light">
+                    {service.description}
+                  </p>
+
+                  {/* Feature Tags */}
+                  <div className="space-y-1.5 pt-2 border-t border-gray-100">
+                    {service.tags.map((tag, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs text-gray-700">
+                        <Check size={13} className="text-[#6C8A66] shrink-0" />
+                        <span>{tag}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            );
-          })}
+
+              {/* Card Action Link */}
+              <div className="p-6 sm:p-7 pt-0 font-sans">
+                <div className="w-full py-3 rounded-2xl bg-[#F4EFE6] group-hover:bg-[#103322] group-hover:text-[#F4EFE6] text-[#103322] font-semibold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 border border-[#A7C4A0]/30 shadow-xs">
+                  <span>Inquire Service</span>
+                  <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
