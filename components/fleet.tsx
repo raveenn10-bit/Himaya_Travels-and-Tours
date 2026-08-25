@@ -15,6 +15,8 @@ export interface FleetProps {
 export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
   const [selectedId, setSelectedId] = useState<string>(fleetData[0].id);
 
+  const loopFleet = [...fleetData, ...fleetData, ...fleetData];
+
   const handleBookFleet = (item: FleetItem) => {
     if (onSelectFleet) {
       onSelectFleet(item.name);
@@ -25,6 +27,100 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const renderFleetCard = (item: FleetItem, idx: number, isMobile = false) => (
+    <div
+      key={`${item.id}-${idx}-${isMobile ? "mob" : "desk"}`}
+      className={`rounded-3xl overflow-hidden bg-white border transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:-translate-y-1 cursor-pointer ${
+        isMobile ? "w-[300px] shrink-0" : "w-full"
+      } ${
+        selectedId === item.id ? "border-[#103322] ring-2 ring-[#A7C4A0]/40 shadow-xl" : "border-[#A7C4A0]/30"
+      }`}
+      onClick={() => setSelectedId(item.id)}
+    >
+      <div>
+        {/* Vehicle Showcase Box with Studio Lighting Effect & Clear Badges */}
+        <div className="relative h-60 sm:h-72 w-full bg-gradient-to-b from-[#F9F7F2] via-white to-gray-50/80 p-4 pt-14 flex items-center justify-center border-b border-gray-100 overflow-hidden group">
+          {/* Top Non-overlapping Badge Row */}
+          <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-20 font-sans">
+            <span className="px-3 py-1 rounded-full bg-[#103322]/90 backdrop-blur-md text-[#F4EFE6] text-[10px] font-semibold uppercase tracking-wider shadow-sm truncate max-w-[55%]">
+              {item.category}
+            </span>
+            <span className="px-3 py-1 rounded-full bg-[#A7C4A0] text-[#103322] text-[11px] font-bold shadow-sm border border-white/60 shrink-0">
+              {item.ratePerDay}
+            </span>
+          </div>
+
+          {/* Prominently Fitted Vehicle Image */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            <Image
+              src={item.image}
+              alt={item.name}
+              fill
+              className="object-contain scale-110 sm:scale-120 group-hover:scale-125 transition-transform duration-500 drop-shadow-2xl"
+              priority={idx === 0}
+            />
+          </div>
+
+          {/* Ground Shadow Floor Indicator */}
+          <div className="absolute bottom-3 w-3/4 h-3 bg-black/10 rounded-full blur-md pointer-events-none" />
+        </div>
+
+        {/* Body Content */}
+        <div className="p-6 space-y-4 font-sans">
+          <div>
+            <h3 className="font-serif text-2xl font-bold text-[#103322]">
+              {item.name}
+            </h3>
+            <p className="text-xs text-[#6C8A66] font-mono font-medium pt-0.5">
+              {item.subtitle}
+            </p>
+          </div>
+
+          {/* Capacity & Luggage Badges */}
+          <div className="grid grid-cols-2 gap-3 py-2.5 border-y border-gray-100 text-xs text-gray-700">
+            <div className="flex items-center gap-2">
+              <Users size={15} className="text-[#6C8A66]" />
+              <span>{item.capacity}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Briefcase size={15} className="text-[#6C8A66]" />
+              <span>{item.luggage}</span>
+            </div>
+          </div>
+
+          {/* Features List */}
+          <div className="space-y-2">
+            <span className="text-[10px] uppercase tracking-wider text-gray-400 font-bold block">
+              Included Amenities
+            </span>
+            <ul className="space-y-1.5 text-xs text-gray-600">
+              {item.features.slice(0, 4).map((feat, i) => (
+                <li key={i} className="flex items-center gap-2">
+                  <Check size={13} className="text-[#6C8A66] shrink-0" />
+                  <span className="truncate">{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Action Button */}
+      <div className="p-6 pt-0 font-sans">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleBookFleet(item);
+          }}
+          className="w-full py-3.5 rounded-full bg-[#103322] hover:bg-[#A7C4A0] hover:text-[#103322] text-[#F4EFE6] font-semibold text-xs uppercase tracking-widest transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01]"
+        >
+          <span>Select {item.name}</span>
+          <ArrowRight size={14} />
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <section className="py-24 bg-[#F4EFE6] overflow-hidden" id="fleet">
@@ -42,104 +138,28 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
           </p>
         </ScrollFade>
 
-        {/* 3 Fleet Cards Grid with Prominently Fitted Studio Cutout Vehicles */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {fleetData.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-              className={`rounded-3xl overflow-hidden bg-white border transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:-translate-y-2 cursor-pointer ${
-                selectedId === item.id ? "border-[#103322] ring-2 ring-[#A7C4A0]/40 shadow-xl" : "border-[#A7C4A0]/30"
-              }`}
-              onClick={() => setSelectedId(item.id)}
-            >
-              <div>
-                {/* Vehicle Showcase Box with Studio Lighting Effect & Clear Badges */}
-                <div className="relative h-64 sm:h-72 w-full bg-gradient-to-b from-[#F9F7F2] via-white to-gray-50/80 p-4 pt-14 flex items-center justify-center border-b border-gray-100 overflow-hidden group">
-                  {/* Top Non-overlapping Badge Row */}
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-20 font-sans">
-                    <span className="px-3 py-1 rounded-full bg-[#103322]/90 backdrop-blur-md text-[#F4EFE6] text-[10px] font-semibold uppercase tracking-wider shadow-sm truncate max-w-[55%]">
-                      {item.category}
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-[#A7C4A0] text-[#103322] text-[11px] font-bold shadow-sm border border-white/60 shrink-0">
-                      {item.ratePerDay}
-                    </span>
-                  </div>
-
-                  {/* Prominently Fitted Vehicle Image */}
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      className="object-contain scale-110 sm:scale-120 group-hover:scale-125 transition-transform duration-500 drop-shadow-2xl"
-                      priority={idx === 0}
-                    />
-                  </div>
-
-                  {/* Subtle Ground Shadow Floor Indicator */}
-                  <div className="absolute bottom-3 w-3/4 h-3 bg-black/10 rounded-full blur-md pointer-events-none" />
-                </div>
-
-                {/* Body Content */}
-                <div className="p-6 sm:p-8 space-y-5 font-sans">
-                  <div>
-                    <h3 className="font-serif text-2xl font-bold text-[#103322]">
-                      {item.name}
-                    </h3>
-                    <p className="text-xs text-[#6C8A66] font-mono font-medium pt-1">
-                      {item.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Capacity & Luggage Badges */}
-                  <div className="grid grid-cols-2 gap-3 py-3 border-y border-gray-100 text-xs text-gray-700">
-                    <div className="flex items-center gap-2">
-                      <Users size={16} className="text-[#6C8A66]" />
-                      <span>{item.capacity}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Briefcase size={16} className="text-[#6C8A66]" />
-                      <span>{item.luggage}</span>
-                    </div>
-                  </div>
-
-                  {/* Features List */}
-                  <div className="space-y-2.5">
-                    <span className="text-[11px] uppercase tracking-wider text-gray-400 font-bold block">
-                      Included Amenities
-                    </span>
-                    <ul className="space-y-2 text-xs text-gray-600">
-                      {item.features.map((feat, i) => (
-                        <li key={i} className="flex items-center gap-2">
-                          <Check size={14} className="text-[#6C8A66] shrink-0" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="p-6 sm:p-8 pt-0 font-sans">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleBookFleet(item);
-                  }}
-                  className="w-full py-3.5 rounded-full bg-[#103322] hover:bg-[#A7C4A0] hover:text-[#103322] text-[#F4EFE6] font-semibold text-xs uppercase tracking-widest transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01]"
-                >
-                  <span>Select {item.name}</span>
-                  <ArrowRight size={14} />
-                </button>
-              </div>
-            </motion.div>
-          ))}
+        {/* Desktop View: 3 Fleet Cards Grid */}
+        <div className="hidden lg:grid grid-cols-3 gap-8">
+          {fleetData.map((item, idx) => renderFleetCard(item, idx, false))}
         </div>
+      </div>
+
+      {/* Mobile View: Infinite Smooth Horizontal Auto-scroll from Left to Right */}
+      <div className="block lg:hidden relative w-full overflow-hidden py-2">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
+
+        <motion.div
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{
+            ease: "linear",
+            duration: 26,
+            repeat: Infinity,
+          }}
+          className="flex gap-4 w-max px-4"
+        >
+          {loopFleet.map((item, idx) => renderFleetCard(item, idx, true))}
+        </motion.div>
       </div>
     </section>
   );

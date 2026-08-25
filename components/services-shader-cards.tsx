@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Plane, Compass, MapPin, Briefcase, Heart, Luggage, ArrowRight, Check, Sparkles } from "lucide-react";
+import { Plane, Compass, MapPin, Briefcase, Heart, Luggage, ArrowRight, Check } from "lucide-react";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
 
 interface ServiceFeature {
@@ -76,6 +76,8 @@ export default function ServicesShaderCards({
 }: {
   onSelectService?: (serviceName: string, desc: string) => void;
 }) {
+  const loopServices = [...servicesData, ...servicesData, ...servicesData];
+
   const handleCardClick = (title: string, description: string) => {
     if (onSelectService) {
       onSelectService(title, description);
@@ -86,12 +88,66 @@ export default function ServicesShaderCards({
     }
   };
 
+  const renderServiceCard = (service: ServiceFeature, index: number, isMobile = false) => (
+    <div
+      key={`${service.title}-${index}-${isMobile ? "mob" : "desk"}`}
+      className={`group rounded-3xl bg-white border border-[#A7C4A0]/40 p-7 sm:p-8 shadow-md hover:shadow-2xl hover:border-[#103322] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between cursor-pointer ${
+        isMobile ? "w-[300px] shrink-0" : "w-full"
+      }`}
+      onClick={() => handleCardClick(service.title, service.description)}
+    >
+      <div className="space-y-4">
+        {/* Top Row: Icon Badge & Rate Badge */}
+        <div className="flex items-center justify-between pb-1">
+          <div className="w-13 h-13 rounded-2xl bg-[#103322] group-hover:bg-[#A7C4A0] transition-colors duration-300 flex items-center justify-center shadow-md">
+            <div className="group-hover:text-[#103322] text-[#A7C4A0] transition-colors">
+              {service.icon}
+            </div>
+          </div>
+
+          <span className="px-3 py-1 rounded-full bg-[#F4EFE6] text-[#103322] text-[11px] font-bold font-sans border border-[#A7C4A0]/40 shadow-xs">
+            {service.rateHint}
+          </span>
+        </div>
+
+        {/* Header Information */}
+        <div className="space-y-1.5">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#6C8A66] font-semibold block">
+            {service.subtitle}
+          </span>
+          <h3 className="font-serif text-2xl font-bold text-[#103322] group-hover:text-[#6C8A66] transition-colors leading-tight">
+            {service.title}
+          </h3>
+        </div>
+
+        {/* Description */}
+        <p className="text-xs text-[#4e6359] leading-relaxed font-sans font-light line-clamp-3">
+          {service.description}
+        </p>
+
+        {/* Feature Tags List */}
+        <div className="space-y-1.5 pt-2 border-t border-gray-100 font-sans">
+          {service.tags.slice(0, 3).map((tag, i) => (
+            <div key={i} className="flex items-center gap-2 text-xs text-gray-700">
+              <Check size={13} className="text-[#6C8A66] shrink-0" />
+              <span className="truncate">{tag}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Inquire Action Button */}
+      <div className="pt-5 font-sans">
+        <div className="w-full py-3 rounded-2xl bg-[#F4EFE6] group-hover:bg-[#103322] group-hover:text-[#F4EFE6] text-[#103322] font-semibold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 border border-[#A7C4A0]/30 shadow-xs">
+          <span>Inquire Service</span>
+          <ArrowRight size={13} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <section className="py-24 bg-[#F4EFE6] border-b border-[#A7C4A0]/30 relative overflow-hidden" id="services">
-      {/* Subtle Background Glow Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#A7C4A0]/15 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-[#103322]/5 blur-3xl pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header with Scroll Fade */}
         <ScrollFade direction="up" className="flex flex-col md:flex-row md:items-end justify-between mb-16">
@@ -120,68 +176,28 @@ export default function ServicesShaderCards({
           </div>
         </ScrollFade>
 
-        {/* 6 Clean Luxury Bento Cards (No Images, Pure Luxury Design) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesData.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 35 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.55, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="group rounded-3xl bg-white border border-[#A7C4A0]/40 p-8 sm:p-9 shadow-md hover:shadow-2xl hover:border-[#103322] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between cursor-pointer"
-              onClick={() => handleCardClick(service.title, service.description)}
-            >
-              <div className="space-y-6">
-                {/* Top Row: Icon Badge & Rate Badge */}
-                <div className="flex items-center justify-between pb-2">
-                  <div className="w-14 h-14 rounded-2xl bg-[#103322] group-hover:bg-[#A7C4A0] transition-colors duration-300 flex items-center justify-center shadow-md">
-                    <div className="group-hover:text-[#103322] text-[#A7C4A0] transition-colors">
-                      {service.icon}
-                    </div>
-                  </div>
-
-                  <span className="px-3.5 py-1.5 rounded-full bg-[#F4EFE6] text-[#103322] text-xs font-bold font-sans border border-[#A7C4A0]/40 shadow-xs">
-                    {service.rateHint}
-                  </span>
-                </div>
-
-                {/* Header Information */}
-                <div className="space-y-2">
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#6C8A66] font-semibold block">
-                    {service.subtitle}
-                  </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#103322] group-hover:text-[#6C8A66] transition-colors leading-tight">
-                    {service.title}
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-[#4e6359] leading-relaxed font-sans font-light">
-                  {service.description}
-                </p>
-
-                {/* Feature Tags List */}
-                <div className="space-y-2 pt-3 border-t border-gray-100 font-sans">
-                  {service.tags.map((tag, i) => (
-                    <div key={i} className="flex items-center gap-2.5 text-xs text-gray-700">
-                      <Check size={14} className="text-[#6C8A66] shrink-0" />
-                      <span>{tag}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bottom Inquire Action Button */}
-              <div className="pt-6 font-sans">
-                <div className="w-full py-3.5 rounded-2xl bg-[#F4EFE6] group-hover:bg-[#103322] group-hover:text-[#F4EFE6] text-[#103322] font-semibold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 border border-[#A7C4A0]/30 shadow-xs">
-                  <span>Inquire Service</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        {/* Desktop View: 3-Column Grid */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {servicesData.map((service, index) => renderServiceCard(service, index, false))}
         </div>
+      </div>
+
+      {/* Mobile View: Infinite Smooth Horizontal Auto-scroll from Left to Right */}
+      <div className="block md:hidden relative w-full overflow-hidden py-2">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
+
+        <motion.div
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{
+            ease: "linear",
+            duration: 35,
+            repeat: Infinity,
+          }}
+          className="flex gap-4 w-max px-4"
+        >
+          {loopServices.map((service, index) => renderServiceCard(service, index, true))}
+        </motion.div>
       </div>
     </section>
   );
