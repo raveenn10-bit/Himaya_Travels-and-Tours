@@ -169,7 +169,7 @@ export default function Footer() {
           <div className="flex flex-wrap justify-center items-center gap-4">
             <a
               href="tel:+94771882633"
-              className="text-2xl md:text-3xl font-serif font-medium italic tracking-wide text-[#103322] hover:text-[#6C8A66] transition-colors"
+              className="text-2xl md:text-3xl font-sans font-black tracking-wider text-[#103322] hover:text-[#6C8A66] transition-colors tabular-nums"
             >
               +94 77 188 2633
             </a>
@@ -178,7 +178,7 @@ export default function Footer() {
               href="https://wa.me/94767885107"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-2xl md:text-3xl font-serif font-medium italic tracking-wide text-[#25D366] hover:text-[#103322] transition-colors"
+              className="text-2xl md:text-3xl font-sans font-black tracking-wider text-[#25D366] hover:text-[#103322] transition-colors tabular-nums"
             >
               +94 76 788 5107
             </a>
