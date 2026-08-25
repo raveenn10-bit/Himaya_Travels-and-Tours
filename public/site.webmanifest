@@ -1,0 +1,19 @@
+﻿{
+  "name": "Himaya Tours & Travels",
+  "short_name": "Himaya Travels",
+  "icons": [
+    {
+      "src": "/logo.PNG",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.PNG",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#103322",
+  "background_color": "#faf8f5",
+  "display": "standalone"
+}

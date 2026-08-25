@@ -1,0 +1,84 @@
+﻿@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-white: #ffffff;
+    --color-beige: #faf8f5;
+    --color-forest: #103322;
+    --color-forest-light: #1c533c;
+    --color-sage: #e8f5ed;
+    --color-slate: #4e6359;
+    --color-slate-light: #8eaba0;
+    --color-charcoal: #121614;
+    --color-charcoal-light: #2c3330;
+    --color-gold: #c5a880;
+    --color-gold-hover: #b3976f;
+    --color-amber: #e2a829;
+    --color-sapphire: #0e3d5c;
+
+    --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+    --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    background-color: var(--color-white);
+    color: var(--color-charcoal);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-white);
+    color: var(--color-charcoal);
+    line-height: 1.6;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+}
+
+/* Custom Utilities */
+.mix-blend-difference {
+  mix-blend-mode: difference;
+}
+
+/* Custom Scrollbar for modern feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #121614;
+}
+::-webkit-scrollbar-thumb {
+  background: #2c3330;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c5a880;
+}
+
+/* Reveal transition helpers */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
