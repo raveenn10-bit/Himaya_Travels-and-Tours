@@ -26,7 +26,7 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
       className="relative min-h-[90vh] lg:min-h-[95vh] flex flex-col justify-between items-center text-white overflow-hidden pt-32 pb-16 bg-[#121614]"
       id="hero-container"
     >
-      {/* Background Video with Smooth Scroll-Linked Scale */}
+      {/* Background Video with Smooth Scroll-Linked Scale using srilanka.mp4 */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
         style={{ scale: videoScale }}
@@ -38,7 +38,7 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
           playsInline
           className="w-full h-full object-cover filter brightness-[0.75] contrast-[1.08] saturate-110"
         >
-          <source src="/Assets/hero 2.mp4" type="video/mp4" />
+          <source src="/Assets/srilanka.mp4" type="video/mp4" />
           Your browser does not support HTML5 video.
         </video>
         {/* Luxury Vignette & Gradient Overlays */}
