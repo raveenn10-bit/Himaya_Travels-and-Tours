@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Navbar from "@/components/navbar";
 import HeroExpansion from "@/components/hero-expansion";
+import TravelGuarantees from "@/components/travel-guarantees";
 import DestinationsShowcase from "@/components/destinations";
 import WhyChooseUs from "@/components/why-choose-us";
 import HorizontalActivities from "@/components/horizontal-activities";
@@ -63,6 +64,9 @@ export default function Home() {
       <main id="main-content">
         {/* Scroll Expanding Video Hero */}
         <HeroExpansion />
+
+        {/* 4 Pillars Travel Guarantees Strip */}
+        <TravelGuarantees />
 
         {/* Destination Themes Showcase */}
         <DestinationsShowcase />
