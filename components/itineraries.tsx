@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Clock, Sparkles, Check, ArrowRight } from "lucide-react";
 import { itinerariesData, ItineraryItem } from "@/lib/data";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
@@ -10,6 +11,8 @@ interface ItinerariesProps {
 }
 
 export default function Itineraries({ onSelectTrack }: ItinerariesProps) {
+  const loopItineraries = [...itinerariesData, ...itinerariesData, ...itinerariesData];
+
   const handleSelectTrack = (track: ItineraryItem) => {
     if (onSelectTrack) {
       onSelectTrack(track.title);
@@ -22,7 +25,7 @@ export default function Itineraries({ onSelectTrack }: ItinerariesProps) {
   const renderTrackCard = (item: ItineraryItem, idx: number, isMobile = false) => (
     <div
       key={`${item.id}-${idx}-${isMobile ? "mob" : "desk"}`}
-      className={`rounded-3xl bg-[#faf8f5] border border-[#c5a880]/20 p-7 sm:p-8 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between snap-center ${
+      className={`rounded-3xl bg-[#faf8f5] border border-[#c5a880]/20 p-7 sm:p-8 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between ${
         isMobile ? "w-[295px] shrink-0" : "w-full"
       }`}
     >
@@ -132,9 +135,22 @@ export default function Itineraries({ onSelectTrack }: ItinerariesProps) {
         </div>
       </div>
 
-      {/* Mobile View: Horizontal Snap Scroll Left to Right (Single Non-Looping Sequence) */}
-      <div className="block lg:hidden relative w-full overflow-x-auto scroll-smooth snap-x snap-mandatory py-3 px-4 flex gap-4 scrollbar-none">
-        {itinerariesData.map((item, idx) => renderTrackCard(item, idx, true))}
+      {/* Mobile View: Smooth Horizontal Auto-scroll Left-to-Right */}
+      <div className="block lg:hidden relative w-full overflow-hidden py-2">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white to-transparent z-10" />
+
+        <motion.div
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{
+            ease: "linear",
+            duration: 28,
+            repeat: Infinity,
+          }}
+          className="flex gap-4 w-max px-4"
+        >
+          {loopItineraries.map((item, idx) => renderTrackCard(item, idx, true))}
+        </motion.div>
       </div>
     </section>
   );

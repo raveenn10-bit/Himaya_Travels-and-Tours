@@ -27,6 +27,8 @@ export default function Destinations({ onSelectDestination }: DestinationsProps)
       ? destinationsData
       : destinationsData.filter((d) => d.category === activeFilter);
 
+  const loopDestinations = [...destinationsData, ...destinationsData, ...destinationsData];
+
   const handleInquire = (title: string) => {
     if (onSelectDestination) {
       onSelectDestination(title);
@@ -39,7 +41,7 @@ export default function Destinations({ onSelectDestination }: DestinationsProps)
   const renderCard = (dest: DestinationItem, idx: number, isMobile = false) => (
     <div
       key={`${dest.id}-${idx}-${isMobile ? "mob" : "desk"}`}
-      className={`group relative rounded-3xl overflow-hidden shadow-xl border border-[#A7C4A0]/30 bg-[#121614] flex flex-col justify-end p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl snap-center ${
+      className={`group relative rounded-3xl overflow-hidden shadow-xl border border-[#A7C4A0]/30 bg-[#121614] flex flex-col justify-end p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl ${
         isMobile ? "w-[295px] h-[450px] shrink-0" : idx % 3 === 0 ? "min-h-[480px] md:col-span-2 lg:col-span-1" : "min-h-[440px]"
       }`}
     >
@@ -139,7 +141,7 @@ export default function Destinations({ onSelectDestination }: DestinationsProps)
           </div>
 
           {/* Region Filter Buttons */}
-          <div className="flex flex-wrap gap-2 mt-6 md:mt-0 font-sans">
+          <div className="hidden md:flex flex-wrap gap-2 mt-6 md:mt-0 font-sans">
             {categories.map((cat) => (
               <button
                 key={cat.key}
@@ -166,9 +168,22 @@ export default function Destinations({ onSelectDestination }: DestinationsProps)
         </div>
       </div>
 
-      {/* Mobile View: Horizontal Snap Scroll Left to Right (Single Non-Looping Sequence) */}
-      <div className="block md:hidden relative w-full overflow-x-auto scroll-smooth snap-x snap-mandatory py-3 px-4 flex gap-4 scrollbar-none">
-        {filteredDestinations.map((dest, idx) => renderCard(dest, idx, true))}
+      {/* Mobile View: Smooth Horizontal Auto-scroll Left-to-Right */}
+      <div className="block md:hidden relative w-full overflow-hidden py-2">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
+
+        <motion.div
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{
+            ease: "linear",
+            duration: 32,
+            repeat: Infinity,
+          }}
+          className="flex gap-4 w-max px-4"
+        >
+          {loopDestinations.map((dest, idx) => renderCard(dest, idx, true))}
+        </motion.div>
       </div>
     </section>
   );

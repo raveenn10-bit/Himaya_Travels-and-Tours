@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Plane, Compass, MapPin, Briefcase, Heart, Luggage, ArrowRight, Check } from "lucide-react";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
 
@@ -75,6 +76,8 @@ export default function ServicesShaderCards({
 }: {
   onSelectService?: (serviceName: string, desc: string) => void;
 }) {
+  const loopServices = [...servicesData, ...servicesData, ...servicesData];
+
   const handleCardClick = (title: string, description: string) => {
     if (onSelectService) {
       onSelectService(title, description);
@@ -88,7 +91,7 @@ export default function ServicesShaderCards({
   const renderServiceCard = (service: ServiceFeature, index: number, isMobile = false) => (
     <div
       key={`${service.title}-${index}-${isMobile ? "mob" : "desk"}`}
-      className={`group rounded-3xl bg-white border border-[#A7C4A0]/40 p-7 sm:p-8 shadow-md hover:shadow-2xl hover:border-[#103322] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between cursor-pointer snap-center ${
+      className={`group rounded-3xl bg-white border border-[#A7C4A0]/40 p-7 sm:p-8 shadow-md hover:shadow-2xl hover:border-[#103322] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between cursor-pointer ${
         isMobile ? "w-[295px] shrink-0" : "w-full"
       }`}
       onClick={() => handleCardClick(service.title, service.description)}
@@ -179,9 +182,22 @@ export default function ServicesShaderCards({
         </div>
       </div>
 
-      {/* Mobile View: Horizontal Snap Scroll Left to Right (Single Non-Looping Sequence) */}
-      <div className="block md:hidden relative w-full overflow-x-auto scroll-smooth snap-x snap-mandatory py-3 px-4 flex gap-4 scrollbar-none">
-        {servicesData.map((service, index) => renderServiceCard(service, index, true))}
+      {/* Mobile View: Smooth Horizontal Auto-scroll Left-to-Right */}
+      <div className="block md:hidden relative w-full overflow-hidden py-2">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
+
+        <motion.div
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{
+            ease: "linear",
+            duration: 35,
+            repeat: Infinity,
+          }}
+          className="flex gap-4 w-max px-4"
+        >
+          {loopServices.map((service, index) => renderServiceCard(service, index, true))}
+        </motion.div>
       </div>
     </section>
   );

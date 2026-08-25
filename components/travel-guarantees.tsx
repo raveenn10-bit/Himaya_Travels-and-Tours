@@ -44,6 +44,8 @@ export default function TravelGuarantees() {
     },
   ];
 
+  const loopItems = [...items, ...items, ...items];
+
   const renderCard = (item: (typeof items)[0], index: number, isMobile = false) => {
     const Icon = item.icon;
     const isHovered = hoveredIdx === index;
@@ -52,7 +54,7 @@ export default function TravelGuarantees() {
       <div
         key={`${item.id}-${index}-${isMobile ? "mob" : "desk"}`}
         onMouseEnter={() => setHoveredIdx(index)}
-        className={`relative rounded-3xl p-7 transition-all duration-300 flex flex-col justify-between group cursor-pointer shadow-md snap-center ${
+        className={`relative rounded-3xl p-7 transition-all duration-300 flex flex-col justify-between group cursor-pointer shadow-md ${
           isMobile ? "w-[285px] shrink-0" : "w-full"
         } ${
           isHovered
@@ -124,9 +126,22 @@ export default function TravelGuarantees() {
         </div>
       </div>
 
-      {/* Mobile View: Horizontal Snap Scroll Left to Right (Single Non-Looping Sequence) */}
-      <div className="block lg:hidden relative w-full overflow-x-auto scroll-smooth snap-x snap-mandatory py-3 px-4 flex gap-4 scrollbar-none">
-        {items.map((item, index) => renderCard(item, index, true))}
+      {/* Mobile View: Smooth Horizontal Auto-scroll Left-to-Right */}
+      <div className="block lg:hidden relative w-full overflow-hidden py-2">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
+
+        <motion.div
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{
+            ease: "linear",
+            duration: 25,
+            repeat: Infinity,
+          }}
+          className="flex gap-4 w-max px-4"
+        >
+          {loopItems.map((item, index) => renderCard(item, index, true))}
+        </motion.div>
       </div>
     </section>
   );

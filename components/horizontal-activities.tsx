@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Clock, MapPin, ArrowRight } from "lucide-react";
 import { activitiesData, ActivityItem } from "@/lib/data";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
@@ -19,10 +20,12 @@ export default function HorizontalActivities({ onSelectActivity }: ActivitiesPro
     }
   };
 
+  const loopActivities = [...activitiesData, ...activitiesData, ...activitiesData];
+
   const renderActivityCard = (item: ActivityItem, index: number, isMobile = false) => (
     <div
       key={`${item.id}-${index}-${isMobile ? "mob" : "desk"}`}
-      className={`rounded-3xl overflow-hidden bg-[#121614] border border-[#A7C4A0]/30 shadow-xl group flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-[#A7C4A0] snap-center ${
+      className={`rounded-3xl overflow-hidden bg-[#121614] border border-[#A7C4A0]/30 shadow-xl group flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-[#A7C4A0] ${
         isMobile ? "w-[285px] shrink-0" : "w-full"
       }`}
     >
@@ -119,9 +122,22 @@ export default function HorizontalActivities({ onSelectActivity }: ActivitiesPro
         </div>
       </div>
 
-      {/* Mobile View: Horizontal Snap Scroll Left to Right (Single Non-Looping Sequence) */}
-      <div className="block lg:hidden relative w-full overflow-x-auto scroll-smooth snap-x snap-mandatory py-3 px-4 flex gap-4 scrollbar-none">
-        {activitiesData.map((item, index) => renderActivityCard(item, index, true))}
+      {/* Mobile View: Smooth Horizontal Auto-scroll Left-to-Right */}
+      <div className="block lg:hidden relative w-full overflow-hidden py-2">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
+
+        <motion.div
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{
+            ease: "linear",
+            duration: 28,
+            repeat: Infinity,
+          }}
+          className="flex gap-4 w-max px-4"
+        >
+          {loopActivities.map((item, index) => renderActivityCard(item, index, true))}
+        </motion.div>
       </div>
     </section>
   );
