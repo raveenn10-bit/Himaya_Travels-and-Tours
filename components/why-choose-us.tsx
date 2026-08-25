@@ -3,31 +3,28 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Map, CalendarCheck, ThumbsUp, Sparkles, ArrowRight } from "lucide-react";
+import { Map, CalendarCheck, ThumbsUp, ArrowRight } from "lucide-react";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
 
 export default function WhyChooseUs() {
   const points = [
     {
       icon: Map,
-      iconBg: "from-[#4A90E2] to-[#357ABD]",
       title: "Exquisite Destinations:",
       description:
-        "Our carefully curated journeys span the most breathtaking corners of Sri Lanka—from ancient UNESCO rock fortresses in Sigiriya to mist-veiled highland tea valleys and serene southern beaches. We ensure you experience authentic Ceylon wonders far beyond the standard tourist trail.",
+        "Our carefully curated journeys span the jewel of the Indian Ocean, ensuring you have access to breathtaking peaks, ancient rock kingdoms in Sigiriya, misty tea hills in Ella, and serene golden coastlines in Galle.",
     },
     {
       icon: CalendarCheck,
-      iconBg: "from-[#5B9DF8] to-[#3B82F6]",
       title: "Tailored Packages:",
       description:
-        "Whether you're a solo adventurer, a couple seeking a romantic tropical escape, or a family yearning for seamless travel with children, our customizable packages cater to all your needs. Choose from our signature routes or let our concierge design an exclusive custom passage just for you.",
+        "Whether you're a solo adventurer, a couple seeking a romantic tropical escape, or a family yearning for seamless travel with children, our customizable packages cater to all your needs. Choose from our pre-designed itineraries or let us tailor one specifically for you.",
     },
     {
       icon: ThumbsUp,
-      iconBg: "from-[#60A5FA] to-[#2563EB]",
       title: "Expert Guidance:",
       description:
-        "Our team of SLTDA-certified chauffeur-guides and travel experts is dedicated to making every mile effortless. From VIP airport greetings and scenic rest-stop recommendations to finding the finest boutique stays, we're by your side 24/7.",
+        "Our team of SLTDA-certified chauffeur-guides and travel experts is dedicated to making every mile effortless. From VIP airport greetings to finding hidden waterfalls and authentic local cuisine, we're with you every step of the way.",
     },
   ];
 
@@ -45,7 +42,7 @@ export default function WhyChooseUs() {
                 Why Choose
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#103322] leading-tight">
-                Travel with Himaya for Your Sri Lankan Journey?
+                Travel with Harsha for Your Sri Lankan Journey?
               </h2>
             </div>
 
@@ -94,35 +91,35 @@ export default function WhyChooseUs() {
             </div>
           </ScrollFade>
 
-          {/* Right Column: 4-Photo Asymmetrical Collage Grid */}
+          {/* Right Column: 4-Photo Asymmetrical Collage Grid with Genuine Sri Lanka Photos */}
           <ScrollFade direction="left" className="lg:col-span-6">
             <div className="grid grid-cols-12 gap-4">
               {/* Left Column of Collage (Photos 1 & 2) */}
               <div className="col-span-6 space-y-4">
-                {/* 1. Cultural Temple Festival (Perahera / Temple of Tooth) */}
+                {/* 1. Cultural Heritage: Sigiriya Lion Rock Fortress */}
                 <div className="relative h-44 sm:h-52 rounded-2xl overflow-hidden shadow-lg border border-[#A7C4A0]/40 group">
                   <Image
-                    src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=800&auto=format&fit=crop"
-                    alt="Cultural Temple of the Tooth Festival at night"
+                    src="/Assets/Sigiriya rock fortress Lion Rock Ceylon.jpg"
+                    alt="Sigiriya Rock Fortress UNESCO Citadel Sri Lanka"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700 filter brightness-95"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                  <span className="absolute bottom-3 left-3 text-[11px] font-sans font-semibold text-white/95 bg-black/40 backdrop-blur-xs px-2.5 py-1 rounded-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                  <span className="absolute bottom-3 left-3 text-[11px] font-sans font-semibold text-white/95 bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-md">
                     Cultural Heritage
                   </span>
                 </div>
 
-                {/* 2. Traditional Sri Lankan Culinary Table (Hoppers & Curries) */}
+                {/* 2. Authentic Flavors: Traditional Ceylon Hopper & Curry Feast */}
                 <div className="relative h-64 sm:h-76 rounded-2xl overflow-hidden shadow-lg border border-[#A7C4A0]/40 group">
                   <Image
-                    src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=800&auto=format&fit=crop"
-                    alt="Traditional Sri Lankan Culinary Dishes & Hoppers"
+                    src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?q=80&w=800&auto=format&fit=crop"
+                    alt="Traditional Sri Lankan Culinary Curry & Clay Pot Feast"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                  <span className="absolute bottom-3 left-3 text-[11px] font-sans font-semibold text-white/95 bg-black/40 backdrop-blur-xs px-2.5 py-1 rounded-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                  <span className="absolute bottom-3 left-3 text-[11px] font-sans font-semibold text-white/95 bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-md">
                     Authentic Flavors
                   </span>
                 </div>
@@ -130,30 +127,30 @@ export default function WhyChooseUs() {
 
               {/* Right Column of Collage (Photos 3 & 4) */}
               <div className="col-span-6 space-y-4">
-                {/* 3. Mountain Viewpoint / Ella Rock High Cliff */}
+                {/* 3. Misty Highlands: Ella Nine Arch Bridge & Tea Hills */}
                 <div className="relative h-64 sm:h-76 rounded-2xl overflow-hidden shadow-lg border border-[#A7C4A0]/40 group">
                   <Image
                     src="https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=800&auto=format&fit=crop"
-                    alt="Panoramic Mountain Cliff Viewpoint in Ella Ceylon"
+                    alt="Ella Nine Arch Bridge & Misty Tea Plantations Sri Lanka"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                  <span className="absolute bottom-3 left-3 text-[11px] font-sans font-semibold text-white/95 bg-black/40 backdrop-blur-xs px-2.5 py-1 rounded-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                  <span className="absolute bottom-3 left-3 text-[11px] font-sans font-semibold text-white/95 bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-md">
                     Misty Highlands
                   </span>
                 </div>
 
-                {/* 4. Iconic Stilt Fishermen at Sunset */}
+                {/* 4. Golden Coastline: Mirissa Coconut Tree Hill & Galle Shore */}
                 <div className="relative h-44 sm:h-52 rounded-2xl overflow-hidden shadow-lg border border-[#A7C4A0]/40 group">
                   <Image
                     src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop"
-                    alt="Sri Lankan Stilt Fishermen along the Southern Coast"
+                    alt="Mirissa Palm Coastline and Galle Fort Sri Lanka"
                     fill
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                  <span className="absolute bottom-3 left-3 text-[11px] font-sans font-semibold text-white/95 bg-black/40 backdrop-blur-xs px-2.5 py-1 rounded-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                  <span className="absolute bottom-3 left-3 text-[11px] font-sans font-semibold text-white/95 bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-md">
                     Golden Coastline
                   </span>
                 </div>
