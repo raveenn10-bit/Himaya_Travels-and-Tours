@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Navbar from "@/components/navbar";
 import HeroExpansion from "@/components/hero-expansion";
 import DestinationsShowcase from "@/components/destinations";
+import WhyChooseUs from "@/components/why-choose-us";
 import HorizontalActivities from "@/components/horizontal-activities";
 import AboutPhilosophy from "@/components/about-philosophy";
 import FleetSection from "@/components/fleet";
@@ -31,11 +32,11 @@ export default function Home() {
       setPrefilledService("VIP Airport Transfer");
     } else if (serviceTitle === "Multi-Day Expeditions") {
       setPrefilledService("Custom Multi-Day Expedition");
-    } else if (serviceTitle === "Regional Day Trips") {
+    } else if (serviceTitle === "Colonial & Heritage Day Trips") {
       setPrefilledService("Colonial City & Day Trip");
-    } else if (serviceTitle === "Bespoke Celebrations") {
+    } else if (serviceTitle === "Bespoke Celebrations & Weddings") {
       setPrefilledService("Bespoke Celebration Chauffeur");
-    } else if (serviceTitle === "Executive Chauffeur") {
+    } else if (serviceTitle === "Executive & Diplomatic Chauffeur") {
       setPrefilledService("Executive Corporate Chauffeur");
     } else {
       setPrefilledService("Custom Multi-Day Expedition");
@@ -54,7 +55,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white selection:bg-[#c5a880] selection:text-[#103322]">
+    <div className="relative min-h-screen bg-[#F4EFE6] selection:bg-[#A7C4A0] selection:text-[#103322]">
       {/* Top Navbar */}
       <Navbar />
 
@@ -66,6 +67,9 @@ export default function Home() {
         {/* Destination Themes Showcase */}
         <DestinationsShowcase />
 
+        {/* Why Choose Harsha & Himaya Tours & Travels Showcase */}
+        <WhyChooseUs />
+
         {/* Island Activities Horizontal Video Gallery */}
         <HorizontalActivities />
 
@@ -75,7 +79,7 @@ export default function Home() {
         {/* Fleet Selection */}
         <FleetSection onSelectFleet={handleSelectFleet} />
 
-        {/* Native WebGL Shader Service Modules */}
+        {/* Bespoke Chauffeur Service Modules */}
         <ServicesShaderCards onSelectService={handleSelectService} />
 
         {/* Pre-Designed Itinerary Paths */}
