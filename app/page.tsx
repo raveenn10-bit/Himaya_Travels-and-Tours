@@ -12,6 +12,7 @@ import FleetSection from "@/components/fleet";
 import ServicesShaderCards from "@/components/services-shader-cards";
 import ItinerariesSection from "@/components/itineraries";
 import BookingDeck from "@/components/booking-deck";
+import ExperienceGallery from "@/components/experience-gallery";
 import ReviewsSection from "@/components/reviews-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
@@ -62,7 +63,7 @@ export default function Home() {
 
       {/* Main Container */}
       <main id="main-content">
-        {/* Scroll Expanding Video Hero */}
+        {/* Scroll Expanding Dual-Video Hero */}
         <HeroExpansion />
 
         {/* 4 Pillars Travel Guarantees Strip */}
@@ -95,7 +96,10 @@ export default function Home() {
           prefilledMessage={prefilledMessage}
         />
 
-        {/* Guest Logs & Testimonials Slider */}
+        {/* Real Customer Experience Gallery with Auto-Scrolling Rails */}
+        <ExperienceGallery />
+
+        {/* Guest Logs & Testimonials Infinite Moving Cards */}
         <ReviewsSection />
 
         {/* HQ Contact & Map */}

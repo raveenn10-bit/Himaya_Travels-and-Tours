@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
@@ -8,8 +8,15 @@ interface HeroExpansionProps {
   onPreFillInquiry?: (service: string, message: string) => void;
 }
 
+const HERO_VIDEOS = [
+  "/Assets/srilanka.mp4",
+  "/Assets/hero 2.mp4",
+];
+
 export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -20,34 +27,59 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
   const textOpacity = useTransform(scrollYProgress, [0, 0.45, 0.8], [1, 0.8, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.8], [0, -60]);
 
+  // Handle sequential video transition
+  const handleVideoEnded = (index: number) => {
+    const nextIndex = (index + 1) % HERO_VIDEOS.length;
+    setActiveVideoIndex(nextIndex);
+    const nextVideo = videoRefs[nextIndex].current;
+    if (nextVideo) {
+      nextVideo.currentTime = 0;
+      nextVideo.play().catch(() => {});
+    }
+  };
+
+  useEffect(() => {
+    // Start playing the active video
+    const currentVideo = videoRefs[activeVideoIndex].current;
+    if (currentVideo) {
+      currentVideo.play().catch(() => {});
+    }
+  }, [activeVideoIndex]);
+
   return (
     <section
       ref={containerRef}
       className="relative min-h-[90vh] lg:min-h-[95vh] flex flex-col justify-between items-center text-white overflow-hidden pt-32 pb-16 bg-[#121614]"
       id="hero-container"
     >
-      {/* Background Video with Smooth Scroll-Linked Scale using srilanka.mp4 */}
+      {/* Background Videos with Smooth Cross-fade and Scroll-Linked Scale */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
         style={{ scale: videoScale }}
       >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover filter brightness-[0.75] contrast-[1.08] saturate-110"
-        >
-          <source src="/Assets/srilanka.mp4" type="video/mp4" />
-          Your browser does not support HTML5 video.
-        </video>
+        {HERO_VIDEOS.map((src, idx) => (
+          <video
+            key={src}
+            ref={videoRefs[idx]}
+            autoPlay={idx === 0}
+            muted
+            playsInline
+            onEnded={() => handleVideoEnded(idx)}
+            className={`absolute inset-0 w-full h-full object-cover filter brightness-[0.75] contrast-[1.08] saturate-110 transition-opacity duration-1000 ease-in-out ${
+              activeVideoIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          >
+            <source src={src} type="video/mp4" />
+          </video>
+        ))}
+
         {/* Luxury Vignette & Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#121614] via-black/40 to-black/60 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(18,22,20,0.65)_100%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#121614] via-black/40 to-black/60 pointer-events-none z-20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(18,22,20,0.65)_100%)] pointer-events-none z-20" />
       </motion.div>
 
       {/* Floating Animated Geometric Shimmers */}
-      <div className="absolute inset-0 z-1 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -71,7 +103,7 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
       {/* Main Hero Header Content with Scroll Fade */}
       <motion.div
         style={{ opacity: textOpacity, y: textY }}
-        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center mt-6 sm:mt-16"
+        className="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center mt-6 sm:mt-16"
       >
         {/* Live Verified Chauffeur Badge */}
         <motion.div
@@ -116,7 +148,7 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
       <motion.div
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-10 flex flex-col items-center opacity-70 mb-4"
+        className="relative z-30 flex flex-col items-center opacity-70 mb-4"
       >
         <span className="text-[10px] uppercase tracking-[0.25em] text-[#A7C4A0] font-sans">
           Scroll To Discover

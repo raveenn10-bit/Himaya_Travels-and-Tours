@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Mail, Lock } from "lucide-react";
+import { MapPin, Mail, Lock, Globe } from "lucide-react";
 
 export default function Footer() {
   const handleNavClick = (href: string) => {
@@ -122,6 +122,12 @@ export default function Footer() {
             Itineraries
           </button>
           <button
+            onClick={() => handleNavClick("#experience-gallery")}
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
+          >
+            Gallery
+          </button>
+          <button
             onClick={() => handleNavClick("#reviews")}
             className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
@@ -193,10 +199,22 @@ export default function Footer() {
         {/* Divider Line */}
         <div className="w-full max-w-4xl h-px bg-[#A7C4A0]/40 mb-8" />
 
-        {/* Copyright */}
-        <div className="flex items-center justify-center gap-2 text-xs text-gray-500 font-sans">
+        {/* Copyright & Official URL */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs text-gray-500 font-sans">
           <span>Copyright &copy; 2026 Himaya Tours & Travels. All Rights Reserved.</span>
-          <Lock size={12} className="text-gray-400" />
+          <span className="hidden sm:inline text-gray-300">·</span>
+          <a
+            href="https://himayatoursandtravels.com"
+            className="text-[#6C8A66] hover:underline flex items-center gap-1"
+          >
+            <Globe size={12} />
+            <span>himayatoursandtravels.com</span>
+          </a>
+          <span className="hidden sm:inline text-gray-300">·</span>
+          <div className="flex items-center gap-1">
+            <Lock size={12} className="text-gray-400" />
+            <span>SSL Secured</span>
+          </div>
         </div>
       </div>
     </footer>
