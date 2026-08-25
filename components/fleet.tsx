@@ -42,7 +42,7 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
           </p>
         </ScrollFade>
 
-        {/* 3 Fleet Cards Grid with Studio Cutout Vehicles */}
+        {/* 3 Fleet Cards Grid with Prominently Fitted Studio Cutout Vehicles */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {fleetData.map((item, idx) => (
             <motion.div
@@ -57,30 +57,31 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
               onClick={() => setSelectedId(item.id)}
             >
               <div>
-                {/* Vehicle Showcase Box with Studio Lighting Effect */}
-                <div className="relative h-64 w-full bg-gradient-to-b from-[#F9F7F2] to-white p-6 flex items-center justify-center border-b border-gray-100 overflow-hidden group">
-                  <div className="relative w-full h-full">
+                {/* Vehicle Showcase Box with Studio Lighting Effect & Clear Badges */}
+                <div className="relative h-64 sm:h-72 w-full bg-gradient-to-b from-[#F9F7F2] via-white to-gray-50/80 p-4 pt-14 flex items-center justify-center border-b border-gray-100 overflow-hidden group">
+                  {/* Top Non-overlapping Badge Row */}
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-20 font-sans">
+                    <span className="px-3 py-1 rounded-full bg-[#103322]/90 backdrop-blur-md text-[#F4EFE6] text-[10px] font-semibold uppercase tracking-wider shadow-sm truncate max-w-[55%]">
+                      {item.category}
+                    </span>
+                    <span className="px-3 py-1 rounded-full bg-[#A7C4A0] text-[#103322] text-[11px] font-bold shadow-sm border border-white/60 shrink-0">
+                      {item.ratePerDay}
+                    </span>
+                  </div>
+
+                  {/* Prominently Fitted Vehicle Image */}
+                  <div className="relative w-full h-full flex items-center justify-center">
                     <Image
                       src={item.image}
                       alt={item.name}
                       fill
-                      className="object-contain drop-shadow-xl transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain scale-110 sm:scale-120 group-hover:scale-125 transition-transform duration-500 drop-shadow-2xl"
+                      priority={idx === 0}
                     />
                   </div>
 
-                  {/* Category Pill */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 rounded-full bg-[#103322]/90 backdrop-blur-md text-[#F4EFE6] text-[11px] font-semibold uppercase tracking-wider font-sans">
-                      {item.category}
-                    </span>
-                  </div>
-
-                  {/* Daily Rate Pill */}
-                  <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 rounded-full bg-[#A7C4A0] text-[#103322] text-xs font-bold font-sans shadow-md border border-white/40">
-                      {item.ratePerDay}
-                    </span>
-                  </div>
+                  {/* Subtle Ground Shadow Floor Indicator */}
+                  <div className="absolute bottom-3 w-3/4 h-3 bg-black/10 rounded-full blur-md pointer-events-none" />
                 </div>
 
                 {/* Body Content */}
