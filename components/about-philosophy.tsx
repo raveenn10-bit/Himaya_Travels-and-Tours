@@ -58,6 +58,8 @@ export default function AboutPhilosophy() {
                 src="/Assets/Sigiriya rock fortress Lion Rock Ceylon.jpg"
                 alt="Sigiriya Ceylon Fortress"
                 fill
+                loading="lazy"
+                decoding="async"
                 className="object-cover filter saturate-105 brightness-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#103322] via-transparent to-transparent" />
@@ -70,6 +72,8 @@ export default function AboutPhilosophy() {
                       src="/logo.PNG"
                       alt="Himaya Logo"
                       fill
+                      loading="lazy"
+                      decoding="async"
                       className="object-contain p-0.5"
                     />
                   </div>

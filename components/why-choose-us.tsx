@@ -102,6 +102,8 @@ export default function WhyChooseUs() {
                     src="/Assets/kandy-perahera.jpg"
                     alt="Kandy Esala Perahera Temple of the Tooth Festival Sri Lanka"
                     fill
+                    loading="lazy"
+                    decoding="async"
                     className="object-cover group-hover:scale-108 transition-transform duration-700 filter brightness-95"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
@@ -116,6 +118,8 @@ export default function WhyChooseUs() {
                     src="/Assets/sri-lankan-cuisine.jpg"
                     alt="Authentic Sri Lankan Cuisine with Plain and Egg Hoppers, Pol Roti and Curries"
                     fill
+                    loading="lazy"
+                    decoding="async"
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
@@ -133,6 +137,8 @@ export default function WhyChooseUs() {
                     src="/Assets/misty-highlands-cliff.jpg"
                     alt="Traveler sitting on Mountain Cliff overlooking lush Green Ceylon Valleys"
                     fill
+                    loading="lazy"
+                    decoding="async"
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
@@ -147,6 +153,8 @@ export default function WhyChooseUs() {
                     src="/Assets/stilt-fishermen-sunset.jpg"
                     alt="Sri Lankan Stilt Fishermen along the Southern Coast at Sunset"
                     fill
+                    loading="lazy"
+                    decoding="async"
                     className="object-cover group-hover:scale-108 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />

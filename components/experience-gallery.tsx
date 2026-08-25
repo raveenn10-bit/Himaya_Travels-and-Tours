@@ -74,6 +74,8 @@ export default function ExperienceGallery() {
                 src={item.src}
                 alt={item.caption}
                 fill
+                loading="lazy"
+                decoding="async"
                 className="object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-95 group-hover:brightness-100"
                 sizes="(max-width: 768px) 260px, 320px"
               />
@@ -112,6 +114,8 @@ export default function ExperienceGallery() {
                 src={item.src}
                 alt={item.caption}
                 fill
+                loading="lazy"
+                decoding="async"
                 className="object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-95 group-hover:brightness-100"
                 sizes="(max-width: 768px) 260px, 320px"
               />

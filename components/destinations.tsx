@@ -48,6 +48,8 @@ export default function Destinations({ onSelectDestination }: DestinationsProps)
         src={dest.image}
         alt={dest.alt}
         fill
+        loading="lazy"
+        decoding="async"
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-108 filter brightness-[0.72] group-hover:brightness-[0.62]"
         sizes="(max-width: 768px) 295px, (max-width: 1200px) 50vw, 33vw"
       />

@@ -54,8 +54,9 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
               src={item.image}
               alt={item.name}
               fill
+              loading="lazy"
+              decoding="async"
               className="object-contain scale-110 sm:scale-120 group-hover:scale-125 transition-transform duration-500 drop-shadow-2xl"
-              priority={idx === 0}
             />
           </div>
 
