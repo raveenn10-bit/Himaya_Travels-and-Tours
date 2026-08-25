@@ -1,15 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { X } from "lucide-react";
 
 export default function WhatsAppWidget() {
+  const [showPill, setShowPill] = useState(true);
+
   return (
-    <aside aria-label="Direct WhatsApp Concierge">
+    <aside aria-label="Direct WhatsApp Concierge" className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+      {/* WhatsApp Pill Callout */}
+      {showPill && (
+        <div className="bg-white/95 backdrop-blur-md text-gray-800 text-xs font-semibold py-2.5 px-4 rounded-full shadow-lg border border-gray-100 flex items-center gap-2 animate-in fade-in slide-in-from-right-4 duration-300">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <a
+            href="https://wa.me/94767885107"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[#25D366] transition-colors"
+          >
+            Chat on WhatsApp
+          </a>
+          <button
+            onClick={() => setShowPill(false)}
+            className="text-gray-400 hover:text-gray-600 ml-1 p-0.5 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="Dismiss message"
+          >
+            <X size={13} />
+          </button>
+        </div>
+      )}
+
+      {/* Floating Action Button */}
       <a
         href="https://wa.me/94767885107"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center group"
+        className="relative p-3.5 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center group"
         aria-label="Direct WhatsApp Concierge"
       >
         <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
