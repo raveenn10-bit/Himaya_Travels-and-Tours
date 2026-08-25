@@ -129,7 +129,7 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
           transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
           className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.08] mb-6 drop-shadow-2xl"
         >
-          Breathe In <br />
+          Welcome To <br />
           <span className="italic font-normal font-serif text-transparent bg-clip-text bg-gradient-to-r from-[#F4EFE6] via-[#A7C4A0] to-[#6C8A66]">
             Ceylon
           </span>
