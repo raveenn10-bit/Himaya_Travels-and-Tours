@@ -141,21 +141,24 @@ export default function Footer() {
           </button>
         </nav>
 
-        {/* Sub-Services Tags */}
-        <div className="text-xs text-gray-600 font-sans leading-relaxed max-w-4xl mb-10">
-          <span>VIP Airport Transfers</span>
-          <span className="mx-2 text-[#6C8A66]">·</span>
-          <span>Custom Multi-Day Expeditions</span>
-          <span className="mx-2 text-[#6C8A66]">·</span>
-          <span>Sigiriya & Heritage Day Trips</span>
-          <span className="mx-2 text-[#6C8A66]">·</span>
-          <span>Highland Tea Cupping & Railway</span>
-          <span className="mx-2 text-[#6C8A66]">·</span>
-          <span>Wild Elephant Safaris</span>
-          <span className="mx-2 text-[#6C8A66]">·</span>
-          <span>Galle Fort Coastal Passages</span>
-          <span className="mx-2 text-[#6C8A66]">·</span>
-          <span>Executive Corporate Chauffeur</span>
+        {/* Sub-Services Tags with Generous Mobile & Desktop Spacing */}
+        <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3 max-w-4xl mb-14 px-2 font-sans">
+          {[
+            "VIP Airport Transfers",
+            "Custom Multi-Day Expeditions",
+            "Sigiriya & Heritage Day Trips",
+            "Highland Tea Cupping & Railway",
+            "Wild Elephant Safaris",
+            "Galle Fort Coastal Passages",
+            "Executive Corporate Chauffeur",
+          ].map((tag, idx) => (
+            <span
+              key={idx}
+              className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#A7C4A0]/40 text-[#103322] text-xs font-medium shadow-xs hover:border-[#103322] transition-colors"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
 
         {/* GET IN TOUCH Highlight */}
