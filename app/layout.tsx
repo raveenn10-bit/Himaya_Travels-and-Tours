@@ -92,7 +92,10 @@ export default function RootLayout({
     },
     priceRange: "$$$",
     image: "/logo.PNG",
-    sameAs: ["https://wa.me/94767885107"],
+    sameAs: [
+      "https://wa.me/94767885107",
+      "https://www.facebook.com/share/1JefL6vGhr/?mibextid=wwXIfr"
+    ],
     areaServed: "Sri Lanka",
     offers: [
       {
