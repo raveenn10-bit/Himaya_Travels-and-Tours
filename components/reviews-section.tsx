@@ -5,7 +5,7 @@ import { InfiniteMovingCards, InfiniteMovingCardItem } from "@/components/ui/inf
 import AddReviewSection from "./add-review-form";
 import { initialReviewsData, ReviewItem } from "@/lib/data";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
-import { Star, ShieldCheck, MessageSquare } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 
 export default function ReviewsSection() {
   const [localCustomReviews, setLocalCustomReviews] = useState<ReviewItem[]>([]);
@@ -120,23 +120,12 @@ export default function ReviewsSection() {
         </ScrollFade>
       </div>
 
-      {/* Infinite Moving Cards Row 1 (Moving Left) */}
-      <div className="w-full pb-4">
+      {/* Single Infinite Moving Testimonial Rail */}
+      <div className="w-full pb-10">
         <InfiniteMovingCards
           items={allItems}
           speed="normal"
           direction="left"
-          pauseOnHover={true}
-          className="py-2"
-        />
-      </div>
-
-      {/* Infinite Moving Cards Row 2 (Moving Right, Slightly Slower for layered depth) */}
-      <div className="w-full pt-2 pb-12">
-        <InfiniteMovingCards
-          items={[...allItems].reverse()}
-          speed="slow"
-          direction="right"
           pauseOnHover={true}
           className="py-2"
         />

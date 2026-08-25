@@ -157,15 +157,33 @@ export default function Navbar() {
               </a>
             </div>
 
-            {/* Ambient Sound Button */}
+            {/* Ambient Sound Button with Visual Equalizer */}
             <button
               onClick={toggleSound}
               type="button"
-              className="p-2 rounded-full bg-white/10 hover:bg-[#A7C4A0] hover:text-[#103322] text-white border border-white/15 transition-all duration-300 cursor-pointer"
+              className={`px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer flex items-center gap-1.5 text-xs font-medium ${
+                isPlaying
+                  ? "bg-[#A7C4A0] text-[#103322] border-[#A7C4A0] shadow-sm"
+                  : "bg-white/10 hover:bg-white/20 text-white border-white/15"
+              }`}
               aria-label={isPlaying ? "Mute ambient music" : "Play ambient music"}
               title={isPlaying ? "Mute ambient sound" : "Play ambient sound"}
             >
-              {isPlaying ? <Volume2 size={15} /> : <VolumeX size={15} />}
+              {isPlaying ? (
+                <>
+                  <Volume2 size={14} className="text-[#103322]" />
+                  <div className="flex items-center gap-0.5 h-3">
+                    <span className="w-0.5 h-full bg-[#103322] rounded-full animate-bounce [animation-delay:0ms]"></span>
+                    <span className="w-0.5 h-2/3 bg-[#103322] rounded-full animate-bounce [animation-delay:150ms]"></span>
+                    <span className="w-0.5 h-full bg-[#103322] rounded-full animate-bounce [animation-delay:300ms]"></span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <VolumeX size={14} />
+                  <span className="hidden sm:inline text-[11px] font-sans">Sound</span>
+                </>
+              )}
             </button>
 
             {/* Mobile Menu Toggle */}
