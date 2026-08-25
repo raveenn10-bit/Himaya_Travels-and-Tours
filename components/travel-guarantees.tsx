@@ -6,7 +6,7 @@ import { Mountain, ShieldCheck, Compass, CalendarCheck, ArrowUpRight } from "luc
 import { ScrollFade } from "@/components/ui/motion-wrapper";
 
 export default function TravelGuarantees() {
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(1); // Default highlight index 1 (Safe Adventure)
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(1);
 
   const items = [
     {
@@ -44,9 +44,6 @@ export default function TravelGuarantees() {
     },
   ];
 
-  // Loop array for mobile infinite marquee
-  const loopItems = [...items, ...items, ...items];
-
   const renderCard = (item: (typeof items)[0], index: number, isMobile = false) => {
     const Icon = item.icon;
     const isHovered = hoveredIdx === index;
@@ -55,17 +52,15 @@ export default function TravelGuarantees() {
       <div
         key={`${item.id}-${index}-${isMobile ? "mob" : "desk"}`}
         onMouseEnter={() => setHoveredIdx(index)}
-        className={`relative rounded-3xl p-7 transition-all duration-300 flex flex-col justify-between group cursor-pointer shadow-md ${
-          isMobile ? "w-[290px] shrink-0" : "w-full"
+        className={`relative rounded-3xl p-7 transition-all duration-300 flex flex-col justify-between group cursor-pointer shadow-md snap-center ${
+          isMobile ? "w-[285px] shrink-0" : "w-full"
         } ${
           isHovered
             ? "bg-white border-2 border-[#103322] shadow-xl -translate-y-1"
             : "bg-white/90 border border-[#A7C4A0]/40 hover:bg-white"
         }`}
       >
-        {/* Card Content */}
         <div className="space-y-4">
-          {/* Icon Container */}
           <div className="flex items-center justify-between">
             <div
               className={`w-13 h-13 rounded-2xl flex items-center justify-center transition-all duration-300 ${
@@ -88,7 +83,6 @@ export default function TravelGuarantees() {
             </span>
           </div>
 
-          {/* Typography */}
           <div className="space-y-1.5">
             <span className="text-[11px] font-mono uppercase tracking-widest text-[#6C8A66] font-semibold block">
               {item.subtitle}
@@ -102,7 +96,6 @@ export default function TravelGuarantees() {
           </div>
         </div>
 
-        {/* Bottom Accent Indicator */}
         <div className="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#103322]">
           <span className="text-[11px] uppercase tracking-wider text-gray-500 group-hover:text-[#103322] transition-colors">
             Learn More
@@ -131,22 +124,9 @@ export default function TravelGuarantees() {
         </div>
       </div>
 
-      {/* Mobile View: Infinite Smooth Horizontal Auto-scroll from Left to Right */}
-      <div className="block lg:hidden relative w-full overflow-hidden py-2">
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
-
-        <motion.div
-          animate={{ x: ["-50%", "0%"] }}
-          transition={{
-            ease: "linear",
-            duration: 25,
-            repeat: Infinity,
-          }}
-          className="flex gap-4 w-max px-4"
-        >
-          {loopItems.map((item, index) => renderCard(item, index, true))}
-        </motion.div>
+      {/* Mobile View: Horizontal Snap Scroll Left to Right (Single Non-Looping Sequence) */}
+      <div className="block lg:hidden relative w-full overflow-x-auto scroll-smooth snap-x snap-mandatory py-3 px-4 flex gap-4 scrollbar-none">
+        {items.map((item, index) => renderCard(item, index, true))}
       </div>
     </section>
   );

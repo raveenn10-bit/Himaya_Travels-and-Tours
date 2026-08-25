@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { Clock, MapPin, ArrowRight } from "lucide-react";
 import { activitiesData, ActivityItem } from "@/lib/data";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
@@ -20,13 +19,11 @@ export default function HorizontalActivities({ onSelectActivity }: ActivitiesPro
     }
   };
 
-  const loopActivities = [...activitiesData, ...activitiesData, ...activitiesData];
-
   const renderActivityCard = (item: ActivityItem, index: number, isMobile = false) => (
     <div
       key={`${item.id}-${index}-${isMobile ? "mob" : "desk"}`}
-      className={`rounded-3xl overflow-hidden bg-[#121614] border border-[#A7C4A0]/30 shadow-xl group flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-[#A7C4A0] ${
-        isMobile ? "w-[290px] shrink-0" : "w-full"
+      className={`rounded-3xl overflow-hidden bg-[#121614] border border-[#A7C4A0]/30 shadow-xl group flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-[#A7C4A0] snap-center ${
+        isMobile ? "w-[285px] shrink-0" : "w-full"
       }`}
     >
       <div>
@@ -100,7 +97,6 @@ export default function HorizontalActivities({ onSelectActivity }: ActivitiesPro
 
   return (
     <section className="py-24 bg-[#F4EFE6] border-b border-[#A7C4A0]/25 overflow-hidden" id="activities-showcase">
-      {/* Full-width container to utilize all screen space */}
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Scroll Fade */}
         <ScrollFade direction="up" className="flex flex-col md:flex-row md:items-end justify-between mb-14 max-w-4xl">
@@ -123,22 +119,9 @@ export default function HorizontalActivities({ onSelectActivity }: ActivitiesPro
         </div>
       </div>
 
-      {/* Mobile View: Infinite Smooth Horizontal Auto-scroll from Left to Right */}
-      <div className="block lg:hidden relative w-full overflow-hidden py-2">
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
-
-        <motion.div
-          animate={{ x: ["-50%", "0%"] }}
-          transition={{
-            ease: "linear",
-            duration: 28,
-            repeat: Infinity,
-          }}
-          className="flex gap-4 w-max px-4"
-        >
-          {loopActivities.map((item, index) => renderActivityCard(item, index, true))}
-        </motion.div>
+      {/* Mobile View: Horizontal Snap Scroll Left to Right (Single Non-Looping Sequence) */}
+      <div className="block lg:hidden relative w-full overflow-x-auto scroll-smooth snap-x snap-mandatory py-3 px-4 flex gap-4 scrollbar-none">
+        {activitiesData.map((item, index) => renderActivityCard(item, index, true))}
       </div>
     </section>
   );

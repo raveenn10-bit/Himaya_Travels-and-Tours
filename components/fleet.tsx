@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Users, Briefcase, Check, ArrowRight } from "lucide-react";
 import { fleetData, FleetItem } from "@/lib/data";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
@@ -14,8 +13,6 @@ export interface FleetProps {
 
 export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
   const [selectedId, setSelectedId] = useState<string>(fleetData[0].id);
-
-  const loopFleet = [...fleetData, ...fleetData, ...fleetData];
 
   const handleBookFleet = (item: FleetItem) => {
     if (onSelectFleet) {
@@ -31,8 +28,8 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
   const renderFleetCard = (item: FleetItem, idx: number, isMobile = false) => (
     <div
       key={`${item.id}-${idx}-${isMobile ? "mob" : "desk"}`}
-      className={`rounded-3xl overflow-hidden bg-white border transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:-translate-y-1 cursor-pointer ${
-        isMobile ? "w-[300px] shrink-0" : "w-full"
+      className={`rounded-3xl overflow-hidden bg-white border transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:-translate-y-1 cursor-pointer snap-center ${
+        isMobile ? "w-[295px] shrink-0" : "w-full"
       } ${
         selectedId === item.id ? "border-[#103322] ring-2 ring-[#A7C4A0]/40 shadow-xl" : "border-[#A7C4A0]/30"
       }`}
@@ -144,22 +141,9 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
         </div>
       </div>
 
-      {/* Mobile View: Infinite Smooth Horizontal Auto-scroll from Left to Right */}
-      <div className="block lg:hidden relative w-full overflow-hidden py-2">
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
-
-        <motion.div
-          animate={{ x: ["-50%", "0%"] }}
-          transition={{
-            ease: "linear",
-            duration: 26,
-            repeat: Infinity,
-          }}
-          className="flex gap-4 w-max px-4"
-        >
-          {loopFleet.map((item, idx) => renderFleetCard(item, idx, true))}
-        </motion.div>
+      {/* Mobile View: Horizontal Snap Scroll Left to Right (Single Non-Looping Sequence) */}
+      <div className="block lg:hidden relative w-full overflow-x-auto scroll-smooth snap-x snap-mandatory py-3 px-4 flex gap-4 scrollbar-none">
+        {fleetData.map((item, idx) => renderFleetCard(item, idx, true))}
       </div>
     </section>
   );
