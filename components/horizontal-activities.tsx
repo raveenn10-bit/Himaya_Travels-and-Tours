@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Clock, MapPin, ArrowRight } from "lucide-react";
-import { activitiesData, ActivityItem } from "@/lib/data";
+import { activitiesData } from "@/lib/data";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
 
 interface ActivitiesProps {
@@ -39,7 +39,7 @@ export default function HorizontalActivities({ onSelectActivity }: ActivitiesPro
           </div>
         </ScrollFade>
 
-        {/* 4 Videos Grid utilizing all space simultaneously */}
+        {/* 4 Videos Grid with optimized preload and image poster fallback */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {activitiesData.map((item, index) => (
             <motion.div
@@ -51,13 +51,15 @@ export default function HorizontalActivities({ onSelectActivity }: ActivitiesPro
               className="rounded-3xl overflow-hidden bg-[#121614] border border-[#A7C4A0]/30 shadow-xl group flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#A7C4A0]"
             >
               <div>
-                {/* Looping Video Container */}
+                {/* Looping Video Container with poster */}
                 <div className="relative h-60 w-full overflow-hidden bg-black">
                   <video
                     autoPlay
                     loop
                     muted
                     playsInline
+                    preload="metadata"
+                    poster={item.imageFallback}
                     className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 filter brightness-[0.9] contrast-[1.05]"
                   >
                     <source src={item.videoSrc} type="video/mp4" />

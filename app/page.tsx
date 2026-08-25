@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/navbar";
 import HeroExpansion from "@/components/hero-expansion";
 import TravelGuarantees from "@/components/travel-guarantees";
@@ -9,14 +10,39 @@ import WhyChooseUs from "@/components/why-choose-us";
 import HorizontalActivities from "@/components/horizontal-activities";
 import AboutPhilosophy from "@/components/about-philosophy";
 import FleetSection from "@/components/fleet";
-import ServicesShaderCards from "@/components/services-shader-cards";
-import ItinerariesSection from "@/components/itineraries";
-import BookingDeck from "@/components/booking-deck";
-import ExperienceGallery from "@/components/experience-gallery";
-import ReviewsSection from "@/components/reviews-section";
-import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 import WhatsAppWidget from "@/components/whatsapp-widget";
+
+// Dynamic imports for heavy below-the-fold modules to maximize initial load speed
+const ServicesShaderCards = dynamic(() => import("@/components/services-shader-cards"), {
+  ssr: true,
+  loading: () => <div className="py-20 text-center text-xs text-gray-400 font-sans">Loading Bespoke Services...</div>,
+});
+
+const ItinerariesSection = dynamic(() => import("@/components/itineraries"), {
+  ssr: true,
+  loading: () => <div className="py-20 text-center text-xs text-gray-400 font-sans">Loading Itineraries...</div>,
+});
+
+const BookingDeck = dynamic(() => import("@/components/booking-deck"), {
+  ssr: true,
+  loading: () => <div className="py-20 text-center text-xs text-gray-400 font-sans">Loading Booking Deck...</div>,
+});
+
+const ReviewsSection = dynamic(() => import("@/components/reviews-section"), {
+  ssr: true,
+  loading: () => <div className="py-20 text-center text-xs text-gray-400 font-sans">Loading Guest Logs...</div>,
+});
+
+const ContactSection = dynamic(() => import("@/components/contact-section"), {
+  ssr: true,
+  loading: () => <div className="py-20 text-center text-xs text-gray-400 font-sans">Loading Contact Desk...</div>,
+});
+
+const ExperienceGallery = dynamic(() => import("@/components/experience-gallery"), {
+  ssr: true,
+  loading: () => <div className="py-20 text-center text-xs text-gray-400 font-sans">Loading Gallery...</div>,
+});
 
 export default function Home() {
   const [prefilledService, setPrefilledService] = useState("");

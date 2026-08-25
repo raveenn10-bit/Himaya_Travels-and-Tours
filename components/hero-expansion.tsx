@@ -9,8 +9,8 @@ interface HeroExpansionProps {
 }
 
 const HERO_VIDEOS = [
-  "/Assets/srilanka.mp4",
-  "/Assets/hero 2.mp4",
+  { src: "/Assets/srilanka.mp4", poster: "/Assets/geo-sigiriya.jpg" },
+  { src: "/Assets/hero 2.mp4", poster: "/Assets/geo-ella.jpg" },
 ];
 
 export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) {
@@ -57,19 +57,21 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
         style={{ scale: videoScale }}
       >
-        {HERO_VIDEOS.map((src, idx) => (
+        {HERO_VIDEOS.map((item, idx) => (
           <video
-            key={src}
+            key={item.src}
             ref={videoRefs[idx]}
             autoPlay={idx === 0}
             muted
             playsInline
+            preload={idx === 0 ? "auto" : "metadata"}
+            poster={item.poster}
             onEnded={() => handleVideoEnded(idx)}
             className={`absolute inset-0 w-full h-full object-cover filter brightness-[0.75] contrast-[1.08] saturate-110 transition-opacity duration-1000 ease-in-out ${
               activeVideoIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            <source src={src} type="video/mp4" />
+            <source src={item.src} type="video/mp4" />
           </video>
         ))}
 
