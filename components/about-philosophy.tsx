@@ -2,23 +2,15 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ShieldCheck, Award, Compass, HeartHandshake, Sparkles } from "lucide-react";
+import { ShieldCheck, Award, Compass, HeartHandshake } from "lucide-react";
 import { ScrollFade } from "@/components/ui/motion-wrapper";
 
 export default function AboutPhilosophy() {
-  const stats = [
-    { value: "500+", label: "Expeditions Curated", sub: "Across all 9 provinces" },
-    { value: "99.8%", label: "5-Star Rating", sub: "Verified international guests" },
-    { value: "100%", label: "Punctuality Guarantee", sub: "Airport meet & greet on time" },
-    { value: "24/7", label: "Concierge Coordination", sub: "Continuous trip assistance" },
-  ];
-
   const standards = [
     {
       icon: ShieldCheck,
       title: "Government Certified Chauffeur Guides",
-      desc: "Every driver-guide holds official SLTDA accreditation, defensive mountain driving training, and fluent English & conversational German language skills.",
+      desc: "Every driver-guide holds official SLTDA accreditation, defensive mountain driving training, and fluent English language skills.",
     },
     {
       icon: Award,
@@ -56,28 +48,6 @@ export default function AboutPhilosophy() {
             Rooted in Galle and operating island-wide, Himaya Tours & Travels blends ancient Ceylon hospitality with uncompromising modern luxury transit.
           </p>
         </ScrollFade>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {stats.map((st, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white/5 border border-[#A7C4A0]/20 rounded-3xl p-6 text-center backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[#A7C4A0] hover:bg-white/10 shadow-lg"
-            >
-              <span className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#A7C4A0] block mb-2">
-                {st.value}
-              </span>
-              <h4 className="text-sm font-semibold text-white uppercase tracking-wider font-sans mb-1">
-                {st.label}
-              </h4>
-              <p className="text-xs text-gray-300 font-sans">{st.sub}</p>
-            </motion.div>
-          ))}
-        </div>
 
         {/* 2-Column Showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
