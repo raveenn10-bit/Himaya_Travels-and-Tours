@@ -14,7 +14,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#faf8f5] text-[#121614] pt-20 pb-12 border-t border-[#c5a880]/20">
+    <footer className="bg-[#F4EFE6] text-[#121614] pt-20 pb-12 border-t border-[#A7C4A0]/40">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
         {/* Brand Logo & Name */}
         <Link
@@ -25,7 +25,7 @@ export default function Footer() {
           }}
           className="flex flex-col items-center group mb-6 focus:outline-none"
         >
-          <div className="relative w-16 h-16 rounded-full overflow-hidden border border-[#c5a880]/40 shadow-sm mb-3 bg-white p-1">
+          <div className="relative w-16 h-16 rounded-full overflow-hidden border border-[#A7C4A0]/60 shadow-sm mb-3 bg-white p-1">
             <Image
               src="/logo.PNG"
               alt="Himaya Tours & Travels Logo"
@@ -33,10 +33,10 @@ export default function Footer() {
               className="object-contain"
             />
           </div>
-          <h3 className="font-serif text-3xl font-bold tracking-[0.25em] text-[#103322] uppercase group-hover:text-[#c5a880] transition-colors">
+          <h3 className="font-serif text-3xl font-bold tracking-[0.25em] text-[#103322] uppercase group-hover:text-[#6C8A66] transition-colors">
             Himaya
           </h3>
-          <span className="text-xs uppercase tracking-[0.35em] text-[#c5a880] font-sans font-bold -mt-0.5">
+          <span className="text-xs uppercase tracking-[0.35em] text-[#6C8A66] font-sans font-bold -mt-0.5">
             Tours & Travels
           </span>
         </Link>
@@ -48,7 +48,7 @@ export default function Footer() {
             href="https://www.facebook.com/share/1JefL6vGhr/?mibextid=wwXIfr"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] text-gray-700 flex items-center justify-center transition-all duration-300 shadow-xs"
+            className="w-10 h-10 rounded-full border border-[#A7C4A0]/40 bg-white hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] text-gray-700 flex items-center justify-center transition-all duration-300 shadow-xs"
             aria-label="Facebook Page"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -61,7 +61,7 @@ export default function Footer() {
             href="https://youtube.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] text-gray-700 flex items-center justify-center transition-all duration-300 shadow-xs"
+            className="w-10 h-10 rounded-full border border-[#A7C4A0]/40 bg-white hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] text-gray-700 flex items-center justify-center transition-all duration-300 shadow-xs"
             aria-label="YouTube Channel"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@ export default function Footer() {
             href="https://wa.me/94767885107"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-[#25D366] hover:text-white hover:border-[#25D366] text-gray-700 flex items-center justify-center transition-all duration-300 shadow-xs"
+            className="w-10 h-10 rounded-full border border-[#A7C4A0]/40 bg-white hover:bg-[#25D366] hover:text-white hover:border-[#25D366] text-gray-700 flex items-center justify-center transition-all duration-300 shadow-xs"
             aria-label="WhatsApp Concierge"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -87,80 +87,80 @@ export default function Footer() {
         <nav className="flex flex-wrap justify-center items-center gap-6 md:gap-10 text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6 font-sans">
           <button
             onClick={() => handleNavClick("#hero-container")}
-            className="hover:text-[#c5a880] transition-colors cursor-pointer"
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
             Home
           </button>
           <button
             onClick={() => handleNavClick("#destinations")}
-            className="hover:text-[#c5a880] transition-colors cursor-pointer"
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
             Destinations
           </button>
           <button
             onClick={() => handleNavClick("#about")}
-            className="hover:text-[#c5a880] transition-colors cursor-pointer"
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
             About Us
           </button>
           <button
             onClick={() => handleNavClick("#fleet")}
-            className="hover:text-[#c5a880] transition-colors cursor-pointer"
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
             Fleet
           </button>
           <button
             onClick={() => handleNavClick("#services")}
-            className="hover:text-[#c5a880] transition-colors cursor-pointer"
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
             Services
           </button>
           <button
             onClick={() => handleNavClick("#tracks")}
-            className="hover:text-[#c5a880] transition-colors cursor-pointer"
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
             Itineraries
           </button>
           <button
             onClick={() => handleNavClick("#reviews")}
-            className="hover:text-[#c5a880] transition-colors cursor-pointer"
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
             Testimonials
           </button>
           <button
             onClick={() => handleNavClick("#contact")}
-            className="hover:text-[#c5a880] transition-colors cursor-pointer"
+            className="hover:text-[#6C8A66] transition-colors cursor-pointer"
           >
             Contact
           </button>
         </nav>
 
         {/* Sub-Services Tags */}
-        <div className="text-xs text-gray-500 font-sans leading-relaxed max-w-4xl mb-10">
+        <div className="text-xs text-gray-600 font-sans leading-relaxed max-w-4xl mb-10">
           <span>VIP Airport Transfers</span>
-          <span className="mx-2 text-[#c5a880]">·</span>
+          <span className="mx-2 text-[#6C8A66]">·</span>
           <span>Custom Multi-Day Expeditions</span>
-          <span className="mx-2 text-[#c5a880]">·</span>
+          <span className="mx-2 text-[#6C8A66]">·</span>
           <span>Sigiriya & Heritage Day Trips</span>
-          <span className="mx-2 text-[#c5a880]">·</span>
+          <span className="mx-2 text-[#6C8A66]">·</span>
           <span>Highland Tea Cupping & Railway</span>
-          <span className="mx-2 text-[#c5a880]">·</span>
+          <span className="mx-2 text-[#6C8A66]">·</span>
           <span>Wild Elephant Safaris</span>
-          <span className="mx-2 text-[#c5a880]">·</span>
+          <span className="mx-2 text-[#6C8A66]">·</span>
           <span>Galle Fort Coastal Passages</span>
-          <span className="mx-2 text-[#c5a880]">·</span>
+          <span className="mx-2 text-[#6C8A66]">·</span>
           <span>Executive Corporate Chauffeur</span>
         </div>
 
         {/* GET IN TOUCH Highlight */}
         <div className="space-y-2 mb-12">
-          <span className="text-[11px] uppercase tracking-[0.3em] font-bold text-[#c5a880] block font-sans">
+          <span className="text-[11px] uppercase tracking-[0.3em] font-bold text-[#6C8A66] block font-sans">
             Get In Touch!
           </span>
           <div className="flex flex-wrap justify-center items-center gap-4">
             <a
               href="tel:+94771882633"
-              className="text-xl md:text-2xl font-serif font-bold text-[#103322] hover:text-[#c5a880] transition-colors"
+              className="text-xl md:text-2xl font-serif font-bold text-[#103322] hover:text-[#6C8A66] transition-colors"
             >
               +94 77 188 2633
             </a>
@@ -176,22 +176,22 @@ export default function Footer() {
           </div>
           <div className="flex flex-wrap justify-center items-center gap-4 text-xs text-[#4e6359] font-sans pt-1">
             <p className="flex items-center gap-1.5">
-              <MapPin size={14} className="text-[#c5a880]" />
+              <MapPin size={14} className="text-[#6C8A66]" />
               <span>Address: 171. Udugama Road, Makuluwa, Galle, Sri Lanka, 80000</span>
             </p>
             <span className="text-gray-300 hidden sm:inline">·</span>
             <a
               href="mailto:dulankawya444@gmail.com"
-              className="flex items-center gap-1.5 hover:text-[#c5a880] transition-colors"
+              className="flex items-center gap-1.5 hover:text-[#6C8A66] transition-colors"
             >
-              <Mail size={14} className="text-[#c5a880]" />
+              <Mail size={14} className="text-[#6C8A66]" />
               <span>dulankawya444@gmail.com</span>
             </a>
           </div>
         </div>
 
         {/* Divider Line */}
-        <div className="w-full max-w-4xl h-px bg-gray-200/80 mb-8" />
+        <div className="w-full max-w-4xl h-px bg-[#A7C4A0]/40 mb-8" />
 
         {/* Copyright */}
         <div className="flex items-center justify-center gap-2 text-xs text-gray-500 font-sans">

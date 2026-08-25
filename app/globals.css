@@ -1,20 +1,19 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 @layer base {
   :root {
     --color-white: #ffffff;
-    --color-beige: #faf8f5;
+    --color-linen: #F4EFE6;
+    --color-cream: #F9F7F2;
+    --color-eucalyptus: #A7C4A0;
+    --color-eucalyptus-light: #C5DBC0;
+    --color-eucalyptus-dark: #6C8A66;
     --color-forest: #103322;
     --color-forest-light: #1c533c;
-    --color-sage: #e8f5ed;
     --color-slate: #4e6359;
-    --color-slate-light: #8eaba0;
     --color-charcoal: #121614;
-    --color-charcoal-light: #2c3330;
     --color-gold: #c5a880;
     --color-gold-hover: #b3976f;
-    --color-amber: #e2a829;
-    --color-sapphire: #0e3d5c;
 
     --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
     --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -29,13 +28,13 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-    background-color: var(--color-white);
+    background-color: var(--color-linen);
     color: var(--color-charcoal);
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-white);
+    background-color: var(--color-linen);
     color: var(--color-charcoal);
     line-height: 1.6;
     font-size: 16px;
@@ -51,12 +50,20 @@
   }
 }
 
-/* Custom Utilities */
-.mix-blend-difference {
-  mix-blend-mode: difference;
+/* Eucalyptus Glow Gradient Accents */
+.bg-eucalyptus-glow {
+  background: linear-gradient(135deg, #F4EFE6 0%, #A7C4A0 50%, #7D9D75 100%);
 }
 
-/* Custom Scrollbar for modern feel */
+.bg-eucalyptus-subtle {
+  background: linear-gradient(180deg, #F4EFE6 0%, #E8EFE5 100%);
+}
+
+.glow-eucalyptus {
+  box-shadow: 0 0 25px rgba(167, 196, 160, 0.35);
+}
+
+/* Custom Scrollbar for modern luxury feel */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -65,20 +72,9 @@
   background: #121614;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2c3330;
+  background: #6C8A66;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c5a880;
-}
-
-/* Reveal transition helpers */
-.reveal-init {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal-active {
-  opacity: 1;
-  transform: translateY(0);
+  background: #A7C4A0;
 }

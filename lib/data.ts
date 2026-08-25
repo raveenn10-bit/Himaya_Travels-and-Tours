@@ -1,232 +1,303 @@
-﻿export interface DestinationItem {
+export interface DestinationItem {
   id: string;
-  category: string;
   title: string;
-  desc: string;
+  tagline: string;
+  category: "culture" | "highlands" | "coast" | "wildlife";
+  categoryLabel: string;
   image: string;
-  layout: "large" | "vertical" | "standard" | "horizontal";
-  speed: number;
+  alt: string;
+  aspect: string;
+  description: string;
+  pricing: string;
+  highlights: string[];
 }
 
 export interface ActivityItem {
-  number: string;
+  id: string;
   title: string;
-  desc: string;
-  video: string;
+  category: string;
+  location: string;
+  duration: string;
+  videoSrc: string;
+  imageFallback: string;
+  description: string;
+  inclusions: string[];
 }
 
 export interface FleetItem {
   id: string;
-  title: string;
-  pax: string;
-  desc: string;
-  specs: {
-    luggage: string;
-    feature: { label: string; value: string };
-    price: string;
-  };
+  name: string;
+  subtitle: string;
+  category: string;
+  capacity: string;
+  luggage: string;
+  image: string;
+  ratePerDay: string;
+  idealFor: string;
+  features: string[];
 }
 
 export interface ItineraryItem {
   id: string;
-  badge: string;
+  days: string;
   title: string;
-  image: string;
-  features: string[];
-  trackParam: string;
+  tagline: string;
+  route: string;
+  idealSeason: string;
+  highlights: string[];
+  inclusions: string[];
 }
 
 export interface ReviewItem {
-  id: string | number;
+  id: string;
   name: string;
+  country?: string;
+  flag?: string;
   affiliation: string;
   quote: string;
   imageSrc: string;
   thumbnailSrc: string;
-  rating?: number;
+  rating: number;
+  date?: string;
+  tourTaken?: string;
   isCustom?: boolean;
 }
 
 export const destinationsData: DestinationItem[] = [
   {
-    id: "sigiriya",
-    category: "Historical Sites",
-    title: "Ancient Fortresses",
-    desc: "Ascend the monumental Lion Rock of Sigiriya, an ancient palace suspended between earth and sky.",
-    image: "/Assets/Sigiriya rock fortress Lion Rock Ceylon.jpg",
-    layout: "large",
-    speed: 0.08,
+    id: "sigiriya-dambulla",
+    title: "Sigiriya & Royal Dambulla",
+    tagline: "The Lion Rock Citadel & Cave Temples",
+    category: "culture",
+    categoryLabel: "Cultural Triangle",
+    image: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?q=80&w=1200&auto=format&fit=crop",
+    alt: "Sigiriya rock fortress Lion Rock Ceylon",
+    aspect: "h-[450px] lg:h-[500px]",
+    description: "Ascend the 5th-century palace in the sky and marvel at ancient fresco galleries, water gardens, and gilded cave sanctuaries.",
+    pricing: "From $55 / Day Chauffeur",
+    highlights: ["Lion Rock Summit", "Dambulla Golden Cave", "Minneriya Safari Link", "Village Cooking Class"],
   },
   {
-    id: "ella",
-    category: "Misty Highlands",
-    title: "Nine Arch Valleys",
-    desc: "Traverse cloud-swept valleys of Ceylon tea plantations and colonial train arcs.",
-    image: "https://i.pinimg.com/736x/34/3d/ef/343def361e12fa29bac7f137c7ac5251.jpg",
-    layout: "vertical",
-    speed: 0.12,
+    id: "ella-nuwaraeliya",
+    title: "Ella & Nuwara Eliya",
+    tagline: "Misty Tea Valleys & Nine Arch Bridge",
+    category: "highlands",
+    categoryLabel: "Misty Highlands",
+    image: "https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=1200&auto=format&fit=crop",
+    alt: "Misty highlands and tea plantations of Ceylon",
+    aspect: "h-[360px]",
+    description: "Wind through rolling emerald hills, colonial tea estates, roaring waterfalls, and the world-renowned panoramic highland train.",
+    pricing: "From $60 / Day Chauffeur",
+    highlights: ["Nine Arch Viaduct", "Artisan Tea Factory", "Little Adam's Peak", "Ramboda Falls"],
   },
   {
-    id: "galle",
-    category: "Golden Shores",
-    title: "Galle Fort & Beaches",
-    desc: "Stroll 17th-century ramparts and relax under swaying palms on pristine sands.",
-    image: "https://i.pinimg.com/736x/e5/14/dd/e514dde6240d308294c8b62d48d25934.jpg",
-    layout: "standard",
-    speed: 0.06,
+    id: "galle-mirissa",
+    title: "Galle Fort & Golden South Coast",
+    tagline: "17th-Century Dutch Ramparts & Ocean Sunsets",
+    category: "coast",
+    categoryLabel: "Southern Coast",
+    image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200&auto=format&fit=crop",
+    alt: "Galle Fort ramparts and tropical coastline",
+    aspect: "h-[360px]",
+    description: "Walk cobblestone streets lined with artisan boutiques and Dutch colonial architecture before relaxing on palm-fringed golden beaches.",
+    pricing: "From $45 / Day Chauffeur",
+    highlights: ["Dutch Fort Walking Tour", "Mirissa Whale Watching", "Stilt Fishermen Passages", "Turtle Conservation"],
   },
   {
-    id: "safari",
-    category: "Land of Lakes & Wildlife",
-    title: "Bespoke Eco-Safaris",
-    desc: "Venture into national sanctuaries bordering water reserves to spot leopards and wild elephants.",
-    image: "https://i.pinimg.com/736x/20/ef/18/20ef18c140b7f3d55e68f1c1641fa112.jpg",
-    layout: "horizontal",
-    speed: 0.1,
+    id: "yala-udawalawe",
+    title: "Yala & Udawalawe Wildlife",
+    tagline: "Leopard Dens & Elephant Herds in the Wild",
+    category: "wildlife",
+    categoryLabel: "Wildlife Sanctuary",
+    image: "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?q=80&w=1200&auto=format&fit=crop",
+    alt: "Wild leopards and elephants in Sri Lankan nature reserves",
+    aspect: "h-[450px] lg:h-[500px]",
+    description: "Track the elusive Ceylon leopard in Yala and witness majestic elephant gatherings along Udawalawe's scenic reservoir shores.",
+    pricing: "From $65 / Day Chauffeur",
+    highlights: ["4x4 Leopard Safari", "Udawalawe Elephant Orphanage", "Bundala Bird Haven", "Bush Camping Option"],
   },
 ];
 
 export const activitiesData: ActivityItem[] = [
   {
-    number: "01",
-    title: "The Highland Railway",
-    desc: "A slow-travel railway journey through waterfalls, tea hills, and pine forests.",
-    video: "/Assets/The Highland Railway.mp4",
+    id: "galle-walk",
+    title: "Galle Fort Sunset Walk",
+    category: "Heritage & Architecture",
+    location: "Galle, Southern Province",
+    duration: "3 - 4 Hours",
+    videoSrc: "/Assets/Galle Fort Walk.mp4",
+    imageFallback: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop",
+    description: "Stroll along historic 17th-century coral ramparts as the Indian Ocean sun paints the sky in shades of amber and gold.",
+    inclusions: ["Private Certified Guide", "Artisan Gelato Stop", "Lighthouse & Ramparts Pass"],
   },
   {
-    number: "02",
-    title: "Galle Fort Walk",
-    desc: "Walk colonial ramparts with a local storyteller, uncovering secrets of spice trade days.",
-    video: "/Assets/Galle Fort Walk.mp4",
+    id: "highland-railway",
+    title: "The Highland Scenic Train",
+    category: "Panoramic Transit",
+    location: "Kandy to Ella Highland Line",
+    duration: "Full Day / 6 Hours",
+    videoSrc: "/Assets/The Highland Railway.mp4",
+    imageFallback: "https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=800&auto=format&fit=crop",
+    description: "One of the world's most breathtaking railway journeys, weaving through cloud forests, deep gorges, and cascading tea estates.",
+    inclusions: ["First Class Observation Tickets", "Luggage Chauffeur Transfer", "Nine Arch Viewpoint"],
   },
   {
-    number: "03",
-    title: "Wild Elephant Safaris",
-    desc: "Witness magnificent elephant herds in their native habitat at Minneriya or Yala national reserves.",
-    video: "/Assets/Wild Elephant Safaris.mp4",
+    id: "elephant-safari",
+    title: "Wild Elephant & Leopard Safaris",
+    category: "Eco-Wildlife",
+    location: "Yala & Minneriya National Parks",
+    duration: "Half Day (Morning or Sunset)",
+    videoSrc: "/Assets/Wild Elephant Safaris.mp4",
+    imageFallback: "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?q=80&w=800&auto=format&fit=crop",
+    description: "Custom modified 4x4 open-top luxury jeeps tracking magnificent wild herds, sloth bears, and leopards in their untouched habitats.",
+    inclusions: ["Private Custom 4x4 Jeep", "Expert Tracker & Chauffeur", "National Park Permits & Refreshments"],
   },
   {
-    number: "04",
-    title: "Highland Tea Cupping",
-    desc: "Learn the fine art of tea plucking and taste single-origin Ceylon leaves inside an active factory.",
-    video: "/Assets/Highland Tea Cupping.mp4",
+    id: "tea-cupping",
+    title: "Highland Single-Estate Tea Cupping",
+    category: "Culinary & Agriculture",
+    location: "Nuwara Eliya & Dimbula",
+    duration: "2 - 3 Hours",
+    videoSrc: "/Assets/Highland Tea Cupping.mp4",
+    imageFallback: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?q=80&w=800&auto=format&fit=crop",
+    description: "Discover the nuanced orthodox artisanal manufacturing of Ceylon tea with estate sommeliers followed by high tea overlooking tea valleys.",
+    inclusions: ["Master Cupping Session", "Estate Factory Access", "Private High Tea Terrace"],
   },
 ];
 
 export const fleetData: FleetItem[] = [
   {
-    id: "sedan",
-    title: "Prestige Sedan",
-    pax: "3 Passengers",
-    desc: "Luxury sedans, ideal for couples, business executives, and premium airport transitions.",
-    specs: {
-      luggage: "2 Large Bags",
-      feature: { label: "Climate control", value: "Dual A/C Zone" },
-      price: "$45 / Day",
-    },
+    id: "prestige-sedan",
+    name: "Prestige Luxury Sedan",
+    subtitle: "Toyota Allion / Premio / Axio / Honda Grace",
+    category: "Couples & Solo Explorers",
+    capacity: "1 - 3 Passengers",
+    luggage: "2 Large + 2 Cabin Bags",
+    ratePerDay: "$45 - $55 / Day",
+    idealFor: "Airport Pickups, Romantic Getaways & Business Travel",
+    image: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=800&auto=format&fit=crop",
+    features: [
+      "Dual Climate Control AC",
+      "Plush Leather Reclining Seats",
+      "Complimentary High-Speed Wi-Fi",
+      "Chilled Mineral Water & Wet Tissues",
+      "Phone Fast-Charging Ports",
+      "English & Sinhala Speaking Chauffeur",
+      "Highway Tolls & Fuel Included",
+    ],
   },
   {
-    id: "cruiser",
-    title: "Grand Cruiser Van",
-    pax: "7 Passengers",
-    desc: "Spacious high-roof cruiser vans, designed for families, active gear, and multi-day tours.",
-    specs: {
-      luggage: "6 Large Bags",
-      feature: { label: "Add-on comfort", value: "Captain Recliners" },
-      price: "$65 / Day",
-    },
+    id: "grand-cruiser",
+    name: "Grand Cruiser VIP Van",
+    subtitle: "Toyota KDH High-Roof / Super GL Luxury Cabin",
+    category: "Families & Small Groups",
+    capacity: "4 - 8 Passengers",
+    luggage: "6 Large + 5 Cabin Bags",
+    ratePerDay: "$65 - $80 / Day",
+    idealFor: "Family Round Tours, Island Expeditions & Surf Trips",
+    image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop",
+    features: [
+      "Individual High-Back Velvet/Leather Recliners",
+      "Overhead Dual AC Vents per Row",
+      "Tinted UV-Protection Privacy Windows",
+      "Large Panoramic Sightseeing Windows",
+      "Roof Rack / Surfboard Mount on Request",
+      "Chilled Ice-Box for Beverages",
+      "Experienced Mountain Route Chauffeur",
+    ],
   },
   {
-    id: "coach",
-    title: "Signature Event Coach",
-    pax: "15+ Passengers",
-    desc: "VIP coaches optimized for large family delegations, weddings, and group travels.",
-    specs: {
-      luggage: "Underdeck Bay",
-      feature: { label: "Audio setup", value: "Premium PA System" },
-      price: "Bespoke Quote",
-    },
+    id: "signature-coach",
+    name: "Signature Event Mini Coach",
+    subtitle: "Toyota Coaster / Rosa VIP Luxury Coach",
+    category: "Corporate & Event Groups",
+    capacity: "9 - 22 Passengers",
+    luggage: "20+ Large Luggage",
+    ratePerDay: "Custom Bespoke Quote",
+    idealFor: "Destination Weddings, Corporate Retreats & Large Delegations",
+    image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=800&auto=format&fit=crop",
+    features: [
+      "Ergonomic VIP Air-Suspension Seats",
+      "PA System & Onboard Entertainment",
+      "Spacious Under-Floor Luggage Holds",
+      "Dedicated Chauffeur & Logistics Assistant",
+      "Multi-Zone High-Capacity Climate Control",
+      "Full Commercial Travel Insurance Coverage",
+    ],
   },
 ];
 
 export const itinerariesData: ItineraryItem[] = [
   {
-    id: "sigiriya-heritage",
-    badge: "1-Day Heritage",
-    title: "Sigiriya Heritage Escape",
-    image: "/Assets/Sigiriya rock fortress Lion Rock Ceylon.jpg",
-    features: [
-      "Guided Sigiriya Lion Rock Fortress climb",
-      "Dambulla ancient cave murals",
-      "Village lunch & pottery demonstration",
-    ],
-    trackParam: "Sigiriya Heritage Escape (1-Day Tour)",
+    id: "heritage-wonders",
+    days: "4 Days / 3 Nights",
+    title: "Kingdoms & Rock Citadels",
+    tagline: "Colombo • Sigiriya • Dambulla • Kandy",
+    route: "Airport ➔ Sigiriya Rock ➔ Golden Dambulla Caves ➔ Sacred Temple of the Tooth ➔ Kandy",
+    idealSeason: "Year-Round",
+    highlights: ["Sigiriya 5th-Century Sky Fortress", "Dambulla Frescoes", "Cultural Dance Gala", "Spice Gardens"],
+    inclusions: ["Dedicated Chauffeur & Sedan", "Unlimited Kilometers", "All Fuel & Tolls", "Airport Meet & Greet"],
   },
   {
-    id: "galle-coastal",
-    badge: "1-Day Maritime",
-    title: "Galle Coastal Passage",
-    image: "https://i.pinimg.com/736x/c9/2e/d2/c92ed290590ecd9916aca816a8f3ce7a.jpg",
-    features: [
-      "Walk 17th-century UNESCO Galle Dutch Fort",
-      "Observe traditional stilt fishermen",
-      "Visit sea turtle conservation hatcheries",
-    ],
-    trackParam: "Galle Coastal Journey (1-Day Tour)",
+    id: "ceylon-highlands-wild",
+    days: "7 Days / 6 Nights",
+    title: "Highland Mist & Wildlife Safari",
+    tagline: "Kandy • Nuwara Eliya • Ella • Yala Safari • Galle",
+    route: "Kandy ➔ Tea Estates ➔ Highland Scenic Railway ➔ Nine Arch Bridge ➔ Yala Leopard Safari ➔ Galle Fort",
+    idealSeason: "October to April (South/West) & May to Sept (East)",
+    highlights: ["Panoramic Scenic Train Journey", "Highland Tea Cupping", "Yala 4x4 Leopard Safari", "Galle Rampart Sunset"],
+    inclusions: ["VIP Grand Cruiser Van", "Chauffeur Lodging Included", "24/7 Concierge Support", "Airport Transfers"],
   },
   {
-    id: "highland-sanctuary",
-    badge: "3 Days / 2 Nights",
-    title: "Highland Sanctuary",
-    image: "https://i.pinimg.com/736x/ca/66/7f/ca667f397295af5a4202003e4d99c321.jpg",
-    features: [
-      "Ella Nine Arch colonial bridge hike",
-      "Nuwara Eliya panoramic tea garden walk",
-      "Scenic train crossing high mountain passes",
-    ],
-    trackParam: "Highland Sanctuary (3 Days / 2 Nights)",
+    id: "grand-island-odyssey",
+    days: "10 Days / 9 Nights",
+    title: "The Ultimate Ceylon Odyssey",
+    tagline: "Full Island Exploration (Cultural Triangle + Highlands + Coast)",
+    route: "Negombo ➔ Sigiriya ➔ Polonnaruwa ➔ Kandy ➔ Nuwara Eliya ➔ Ella ➔ Yala ➔ Mirissa ➔ Galle ➔ Airport",
+    idealSeason: "Year-Round Custom Route",
+    highlights: ["Ancient Ruins & Citadels", "Scenic Highland Rail", "Whale Watching at Mirissa", "Colonial Galle Heritage"],
+    inclusions: ["Private Luxury Chauffeur & Vehicle", "Full Fuel & Express Highway Tolls", "Complimentary 4G Wi-Fi", "Daily Chilled Waters"],
   },
 ];
 
 export const initialReviewsData: ReviewItem[] = [
   {
-    id: "static-1",
-    name: "Elena & Pierre",
-    affiliation: "France • Premium Sedan",
-    quote:
-      "LuxeCeylon crafted an extraordinary honeymoon for us. The Mercedes sedan was spotless, and our chauffeur guide was highly knowledgeable and elegant.",
-    imageSrc: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&h=800&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=120&h=160&fit=crop&q=80",
+    id: "1",
+    name: "Oliver & Sophie Montgomery",
+    country: "United Kingdom",
+    flag: "🇬🇧",
+    affiliation: "London, UK • 7-Day Highland & Safari Expedition",
+    quote: "Himaya Tours & Travels provided the absolute highlight of our honeymoon. Our private chauffeur, was deeply knowledgeable, polite, and navigated the mountain passes with utmost grace. The high-roof van was spotless with iced bottled water provided daily.",
+    imageSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop",
+    thumbnailSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
     rating: 5,
+    date: "February 2026",
+    tourTaken: "7-Day Highland & Safari Track",
   },
   {
-    id: "static-2",
-    name: "Dr. Alister Vance",
-    affiliation: "United Kingdom • Family Cruiser",
-    quote:
-      "Travelling with three kids is demanding, but the luxury van made our 12-day round tour flawless. Safe driving and flexible, stress-free scheduling.",
-    imageSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=160&fit=crop&q=80",
+    id: "2",
+    name: "Dr. Markus & Helga Weber",
+    country: "Germany",
+    flag: "🇩🇪",
+    affiliation: "Munich, Germany • 10-Day Island Odyssey",
+    quote: "Exceptional punctuality, flawless English and German communication, and an impeccably maintained luxury sedan. We always felt safe and completely relaxed throughout our trip from Sigiriya down to Galle Fort. Highest recommendation.",
+    imageSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop",
+    thumbnailSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
     rating: 5,
+    date: "January 2026",
+    tourTaken: "10-Day Ultimate Ceylon Odyssey",
   },
   {
-    id: "static-3",
-    name: "Sophia Chen",
-    affiliation: "Singapore • Airport Transfer",
-    quote:
-      "Concierge service was exceptionally professional. Prompt midnight pickup, beautiful corporate fleet, and smooth coordination.",
-    imageSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=160&fit=crop&q=80",
+    id: "3",
+    name: "Aiden & Claire Richardson",
+    country: "Australia",
+    flag: "🇦🇺",
+    affiliation: "Melbourne, Australia • Family Wildlife Journey",
+    quote: "Traveling with two young kids can be demanding, but Himaya Travels made everything seamless. The vehicle had supreme AC, great Wi-Fi, and our driver knew the best quiet rest stops and wild elephant viewpoints. Superb service!",
+    imageSrc: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop",
+    thumbnailSrc: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=150&auto=format&fit=crop",
     rating: 5,
-  },
-  {
-    id: "static-4",
-    name: "Marcus Cole",
-    affiliation: "Australia • Multi-Day Expedition",
-    quote:
-      "A true time-saver. Highly recommend LuxeCeylon for anyone visiting Sri Lanka. Our guide was incredibly polite, spoke fluent English, and drove perfectly.",
-    imageSrc: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&h=800&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=120&h=160&fit=crop&q=80",
-    rating: 5,
+    date: "December 2025",
+    tourTaken: "Custom 5-Day Wildlife & Coast",
   },
 ];

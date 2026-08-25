@@ -1,277 +1,240 @@
-﻿"use client";
+"use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown, ArrowRight, Shield, MapPin, Calendar, Send, Sparkles } from "lucide-react";
 
-export default function HeroExpansion({
-  onExpandedChange,
-}: {
-  onExpandedChange?: (expanded: boolean) => void;
-}) {
-  const [progress, setProgress] = useState(0);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const touchStartY = useRef(0);
-  const touchStartX = useRef(0);
-  const lastTouchY = useRef(0);
-  const lastTouchTime = useRef(0);
-  const velocity = useRef(0);
-  const touchLocked = useRef(false);
-  const snapAnimRef = useRef<number | null>(null);
+interface HeroExpansionProps {
+  onPreFillInquiry?: (service: string, message: string) => void;
+}
 
+export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) {
+  const [pickup, setPickup] = useState("Colombo BIA Airport (CMB)");
+  const [vehicle, setVehicle] = useState("Prestige Luxury Sedan ($45/day)");
+  const [duration, setDuration] = useState("5");
   const containerRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const snapTo = (target: number) => {
-    if (snapAnimRef.current) cancelAnimationFrame(snapAnimRef.current);
-    const tick = () => {
-      setProgress((prev) => {
-        const diff = target - prev;
-        if (Math.abs(diff) < 0.005) {
-          const finalVal = target;
-          setIsExpanded(finalVal >= 1);
-          if (onExpandedChange) onExpandedChange(finalVal >= 1);
-          snapAnimRef.current = null;
-          return finalVal;
-        }
-        const next = prev + diff * 0.18;
-        setIsExpanded(next >= 0.99);
-        if (onExpandedChange) onExpandedChange(next >= 0.99);
-        snapAnimRef.current = requestAnimationFrame(tick);
-        return next;
-      });
-    };
-    snapAnimRef.current = requestAnimationFrame(tick);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.45, 0.8], [1, 0.8, 0]);
+  const textY = useTransform(scrollYProgress, [0, 0.8], [0, -60]);
+
+  const handleQuickQuote = (e: React.FormEvent) => {
+    e.preventDefault();
+    const prompt = `Hello Himaya Tours & Travels! I would like an instant quotation:\n\n• Pickup Location: ${pickup}\n• Vehicle Preference: ${vehicle}\n• Trip Duration: ${duration} Days\n• Please provide availability and chauffeur quote.`;
+    const url = `https://wa.me/94767885107?text=${encodeURIComponent(prompt)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
-
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (snapAnimRef.current) {
-        cancelAnimationFrame(snapAnimRef.current);
-        snapAnimRef.current = null;
-      }
-
-      if (isExpanded && e.deltaY < 0 && window.scrollY <= 5) {
-        e.preventDefault();
-        setIsExpanded(false);
-        if (onExpandedChange) onExpandedChange(false);
-        setProgress(0.99);
-      } else if (!isExpanded) {
-        e.preventDefault();
-        setProgress((prev) => {
-          const next = Math.min(1, Math.max(0, prev + e.deltaY * 0.001));
-          if (next >= 1) {
-            setIsExpanded(true);
-            if (onExpandedChange) onExpandedChange(true);
-          }
-          return next;
-        });
-      }
-    };
-
-    const handleTouchStart = (e: TouchEvent) => {
-      if (snapAnimRef.current) {
-        cancelAnimationFrame(snapAnimRef.current);
-        snapAnimRef.current = null;
-      }
-      touchStartY.current = e.touches[0].clientY;
-      touchStartX.current = e.touches[0].clientX;
-      lastTouchY.current = touchStartY.current;
-      lastTouchTime.current = performance.now();
-      velocity.current = 0;
-      touchLocked.current = false;
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!touchStartY.current) return;
-      const cy = e.touches[0].clientY;
-      const cx = e.touches[0].clientX;
-      const totalDX = Math.abs(cx - touchStartX.current);
-      const totalDY = Math.abs(cy - touchStartY.current);
-
-      if (totalDX > totalDY && totalDX > 8) return;
-
-      if (!touchLocked.current) {
-        if (totalDY >= 8) touchLocked.current = true;
-        else return;
-      }
-
-      const now = performance.now();
-      const dt = Math.max(now - lastTouchTime.current, 1);
-      velocity.current = (lastTouchY.current - cy) / dt;
-      lastTouchY.current = cy;
-      lastTouchTime.current = now;
-
-      if (isExpanded && cy - touchStartY.current > 30 && window.scrollY <= 5) {
-        e.preventDefault();
-        setIsExpanded(false);
-        if (onExpandedChange) onExpandedChange(false);
-        setProgress(0.99);
-        return;
-      }
-
-      if (!isExpanded) {
-        e.preventDefault();
-        const totalSwipeUp = touchStartY.current - cy;
-        setProgress((prev) => {
-          const next = Math.min(1, Math.max(0, prev + totalSwipeUp * 0.009));
-          return next;
-        });
-        touchStartY.current = cy;
-      }
-    };
-
-    const handleTouchEnd = () => {
-      touchStartY.current = 0;
-      if (!touchLocked.current) return;
-      touchLocked.current = false;
-
-      if (progress >= 1 || progress <= 0) return;
-
-      const FLICK_UP = 0.05;
-      const FLICK_DOWN = 0.25;
-      let target = 0;
-      if (velocity.current > FLICK_UP) target = 1;
-      else if (velocity.current < -FLICK_DOWN) target = 0;
-      else target = progress >= 0.1 ? 1 : 0;
-
-      snapTo(target);
-    };
-
-    const handleScrollLock = () => {
-      if (!isExpanded && window.scrollY > 0) {
-        window.scrollTo(0, 0);
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("scroll", handleScrollLock);
-    window.addEventListener("touchstart", handleTouchStart, { passive: false });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("touchend", handleTouchEnd, { passive: true });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("scroll", handleScrollLock);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleTouchEnd);
-      if (snapAnimRef.current) cancelAnimationFrame(snapAnimRef.current);
-    };
-  }, [isExpanded, progress, onExpandedChange]);
-
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const baseW = isMobile ? 220 : 320;
-  const baseH = isMobile ? 320 : 420;
-  const currentRad = (isMobile ? 24 : 20) * (1 - progress);
-  const textTranslateX = progress * (isMobile ? 180 : 150);
 
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center select-none"
+      className="relative min-h-[100vh] lg:min-h-[110vh] flex flex-col justify-between items-center text-white overflow-hidden pt-28 pb-16 bg-[#121614]"
       id="hero-container"
     >
-      {/* Background ambient video (fades out as user expands) */}
-      <div
-        className="absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-300"
-        style={{ opacity: 1 - progress }}
+      {/* Background Video with Smooth Scroll-Linked Scale */}
+      <motion.div
+        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+        style={{ scale: videoScale }}
       >
         <video
           autoPlay
-          muted
           loop
+          muted
           playsInline
-          poster="/Assets/Sigiriya rock fortress Lion Rock Ceylon.jpg"
-          className="w-full h-full object-cover filter brightness-75"
+          className="w-full h-full object-cover filter brightness-[0.75] contrast-[1.08] saturate-110"
         >
           <source src="/Assets/hero 2.mp4" type="video/mp4" />
+          Your browser does not support HTML5 video.
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+        {/* Luxury Vignette & Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#121614] via-black/40 to-black/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(18,22,20,0.65)_100%)] pointer-events-none" />
+      </motion.div>
+
+      {/* Floating Animated Geometric Shimmers */}
+      <div className="absolute inset-0 z-1 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.15, 0.3, 0.15],
+            rotate: [0, 90, 0],
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#c5a880]/20 blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.1, 0.25, 0.1],
+            rotate: [90, 0, 90],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 -right-32 w-[500px] h-[500px] rounded-full bg-[#103322]/40 blur-3xl"
+        />
       </div>
 
-      {/* Expanding Media Box */}
-      <div
-        ref={wrapperRef}
-        className="relative z-20 flex items-center justify-center overflow-hidden shadow-2xl transition-all duration-75"
-        style={{
-          width: `calc(${baseW}px + (100vw - ${baseW}px) * ${progress})`,
-          height: `calc(${baseH}px + (100vh - ${baseH}px) * ${progress})`,
-          borderRadius: `${currentRad}px`,
-        }}
+      {/* Main Hero Header Content with Scroll Fade */}
+      <motion.div
+        style={{ opacity: textOpacity, y: textY }}
+        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center mt-6 sm:mt-12"
       >
-        <div
-          className="relative w-full h-full overflow-hidden"
-          style={{ borderRadius: `${currentRad}px` }}
+        {/* Live Weather / Season Indicator Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-gray-200 mb-6 shadow-lg"
         >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/Assets/Sigiriya rock fortress Lion Rock Ceylon.jpg"
-            className="w-full h-full object-cover"
-          >
-            <source src="/Assets/srilanka.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/25" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className="text-[#c5a880] tracking-wider uppercase text-[10px] font-bold font-sans">
+            Verified Chauffeur Service
+          </span>
+          <span className="text-gray-400">•</span>
+          <span className="text-gray-200">Galle • Colombo • Kandy</span>
+        </motion.div>
 
-          {/* Meta overlay inside frame */}
-          <div
-            className="absolute bottom-6 inset-x-6 flex justify-between items-center text-xs uppercase tracking-widest text-white/90 font-mono pointer-events-none"
-            style={{ opacity: 1 - progress }}
+        {/* Brand Main Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+          className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.08] mb-6 drop-shadow-2xl"
+        >
+          Breathe In <br />
+          <span className="italic font-normal font-serif text-transparent bg-clip-text bg-gradient-to-r from-[#e7d8c5] via-[#c5a880] to-[#dfc49e]">
+            Ceylon
+          </span>
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
+          className="max-w-2xl text-base sm:text-xl text-gray-200/90 font-light leading-relaxed mb-8 drop-shadow-md font-sans"
+        >
+          Curated private driver-guided journeys, pristine climate-controlled fleets, and tailored routes across the misty peaks and golden shores of Sri Lanka.
+        </motion.p>
+
+        {/* Dual Primary Call-to-Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mb-12"
+        >
+          <a
+            href="https://wa.me/94767885107"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#c5a880] hover:bg-white text-[#103322] font-semibold text-xs uppercase tracking-widest transition-all duration-300 shadow-xl flex items-center justify-center gap-2 group cursor-pointer hover:scale-105 active:scale-95"
           >
-            <span
-              style={{
-                transform: `translate3d(-${textTranslateX}vw, 0, 0)`,
-                transition: "transform 0.1s linear",
-              }}
-            >
-              Himaya Ceylon
+            <span>WhatsApp Concierge</span>
+            <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+          </a>
+
+          <button
+            onClick={() => {
+              const el = document.querySelector("#tracks");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md font-semibold text-xs uppercase tracking-widest transition-all duration-300 shadow-lg cursor-pointer hover:scale-105 active:scale-95"
+          >
+            Explore Itineraries
+          </button>
+        </motion.div>
+      </motion.div>
+
+      {/* Floating VIP Quick Search / Quotation Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.65, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-4"
+      >
+        <form
+          onSubmit={handleQuickQuote}
+          className="bg-[#121614]/90 backdrop-blur-2xl border border-[#c5a880]/30 rounded-3xl p-4 sm:p-5 shadow-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center transition-all hover:border-[#c5a880]/60"
+        >
+          {/* Pickup */}
+          <div className="flex flex-col text-left px-3 py-2 rounded-2xl bg-white/5 border border-white/10">
+            <span className="text-[10px] uppercase font-bold text-[#c5a880] tracking-wider flex items-center gap-1">
+              <MapPin size={11} /> Pickup Location
             </span>
-            <span
-              className="flex items-center gap-1"
-              style={{
-                transform: `translate3d(${textTranslateX}vw, 0, 0)`,
-                transition: "transform 0.1s linear",
-              }}
+            <select
+              value={pickup}
+              onChange={(e) => setPickup(e.target.value)}
+              className="bg-transparent text-xs text-white font-medium focus:outline-none mt-1 cursor-pointer"
             >
-              Scroll to Expand <ChevronDown size={14} className="animate-bounce" />
-            </span>
+              <option value="Colombo Airport (CMB)" className="bg-[#121614]">Colombo Airport (CMB)</option>
+              <option value="Galle / Unawatuna / Mirissa" className="bg-[#121614]">Galle / Mirissa Coast</option>
+              <option value="Kandy City" className="bg-[#121614]">Kandy City Centre</option>
+              <option value="Nuwara Eliya / Ella" className="bg-[#121614]">Ella / Nuwara Eliya</option>
+              <option value="Bentota / Ahungalla" className="bg-[#121614]">Bentota / West Coast</option>
+            </select>
           </div>
-        </div>
-      </div>
 
-      {/* Splitting Large Titles */}
-      <div className="absolute inset-0 flex items-center justify-between px-6 md:px-24 pointer-events-none z-30 mix-blend-difference text-white">
-        <h2
-          className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight"
-          style={{
-            transform: `translate3d(-${textTranslateX}vw, 0, 0)`,
-            transition: "transform 0.05s linear",
-          }}
-        >
-          Breathe
-        </h2>
-        <h2
-          className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-right"
-          style={{
-            transform: `translate3d(${textTranslateX}vw, 0, 0)`,
-            transition: "transform 0.05s linear",
-          }}
-        >
-          In Ceylon
-        </h2>
-      </div>
+          {/* Vehicle Class */}
+          <div className="flex flex-col text-left px-3 py-2 rounded-2xl bg-white/5 border border-white/10">
+            <span className="text-[10px] uppercase font-bold text-[#c5a880] tracking-wider flex items-center gap-1">
+              <Shield size={11} /> Vehicle Class
+            </span>
+            <select
+              value={vehicle}
+              onChange={(e) => setVehicle(e.target.value)}
+              className="bg-transparent text-xs text-white font-medium focus:outline-none mt-1 cursor-pointer"
+            >
+              <option value="Prestige Sedan ($45/day)" className="bg-[#121614]">Prestige Sedan (1-3 Pax)</option>
+              <option value="Grand Cruiser Van ($65/day)" className="bg-[#121614]">Grand Cruiser Van (4-8 Pax)</option>
+              <option value="Signature Event Coach" className="bg-[#121614]">VIP Coach (9-22 Pax)</option>
+            </select>
+          </div>
 
-      {/* Manual Click Trigger to Skip/Expand */}
-      {progress < 0.95 && (
-        <button
-          onClick={() => snapTo(1)}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer"
-        >
-          Explore Island
-        </button>
-      )}
+          {/* Duration */}
+          <div className="flex flex-col text-left px-3 py-2 rounded-2xl bg-white/5 border border-white/10">
+            <span className="text-[10px] uppercase font-bold text-[#c5a880] tracking-wider flex items-center gap-1">
+              <Calendar size={11} /> Trip Duration
+            </span>
+            <select
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              className="bg-transparent text-xs text-white font-medium focus:outline-none mt-1 cursor-pointer"
+            >
+              <option value="1" className="bg-[#121614]">1 Day (Day Trip / Transfer)</option>
+              <option value="3" className="bg-[#121614]">3 Days (Express Escape)</option>
+              <option value="5" className="bg-[#121614]">5 Days (Essential Ceylon)</option>
+              <option value="7" className="bg-[#121614]">7 Days (Highlands & Safari)</option>
+              <option value="10" className="bg-[#121614]">10+ Days (Complete Island Tour)</option>
+            </select>
+          </div>
+
+          {/* Instant WhatsApp Quote Action */}
+          <button
+            type="submit"
+            className="w-full h-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#1EBE5D] hover:from-[#20bd5a] hover:to-[#17a850] text-white font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 cursor-pointer"
+          >
+            <span>Get Instant Quote</span>
+            <Send size={13} />
+          </button>
+        </form>
+      </motion.div>
+
+      {/* Subtle Scroll Down Prompt */}
+      <motion.div
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="relative z-10 flex flex-col items-center opacity-70"
+      >
+        <span className="text-[10px] uppercase tracking-[0.25em] text-[#c5a880] font-sans">
+          Scroll To Discover
+        </span>
+        <ChevronDown size={14} className="text-[#c5a880] mt-0.5" />
+      </motion.div>
     </section>
   );
 }

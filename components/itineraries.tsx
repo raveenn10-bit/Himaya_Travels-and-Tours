@@ -1,86 +1,134 @@
-﻿"use client";
+"use client";
 
 import React from "react";
-import { itinerariesData } from "@/lib/data";
-import { Check, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Clock, Sparkles, Check, ArrowRight } from "lucide-react";
+import { itinerariesData, ItineraryItem } from "@/lib/data";
+import { ScrollFade } from "@/components/ui/motion-wrapper";
 
-export default function ItinerariesSection({
-  onSelectTrack,
-}: {
-  onSelectTrack?: (trackName: string) => void;
-}) {
-  const handleSelect = (trackName: string) => {
-    if (onSelectTrack) onSelectTrack(trackName);
-    const bookingPanel = document.getElementById("booking-section");
-    if (bookingPanel) {
-      bookingPanel.scrollIntoView({ behavior: "smooth" });
+interface ItinerariesProps {
+  onSelectTrack?: (trackTitle: string) => void;
+}
+
+export default function Itineraries({ onSelectTrack }: ItinerariesProps) {
+  const handleSelectTrack = (track: ItineraryItem) => {
+    if (onSelectTrack) {
+      onSelectTrack(track.title);
+    } else {
+      const el = document.querySelector("#booking-section");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <section className="py-24 bg-white" id="tracks">
+    <section className="py-24 bg-white overflow-hidden" id="tracks">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        {/* Section Header with Scroll Fade */}
+        <ScrollFade direction="up" className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#c5a880] block mb-3 font-sans">
-            Suggested Paths
+            Suggested Expeditions
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
-            Pre-Designed Journeys
+            Curated Sri Lanka Tracks
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans">
-            Select a popular passage outline to pre-fill your luxury booking inquiry details.
+          <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans font-light">
+            Flexible private driver journeys tailored to your rhythm. Customize stops, accommodations, and durations with our 24/7 concierge team.
           </p>
-        </div>
+        </ScrollFade>
 
-        {/* Itineraries Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {itinerariesData.map((item) => (
-            <article
+        {/* 3 Itinerary Cards Grid with Motion */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {itinerariesData.map((item, idx) => (
+            <motion.div
               key={item.id}
-              className="bg-[#faf8f5] rounded-3xl overflow-hidden border border-[#c5a880]/20 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+              className="rounded-3xl bg-[#faf8f5] border border-[#c5a880]/20 p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
             >
-              <div>
-                {/* Image Box */}
-                <div className="relative h-60 w-full overflow-hidden">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center hover:scale-105 transition-transform duration-700"
-                    style={{ backgroundImage: `url('${item.image}')` }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <span className="absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#103322] font-sans shadow">
-                    {item.badge}
+              <div className="space-y-6">
+                {/* Duration & Season Tag */}
+                <div className="flex items-center justify-between font-sans">
+                  <span className="px-3.5 py-1.5 rounded-full bg-[#103322] text-[#c5a880] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                    <Clock size={13} /> {item.days}
+                  </span>
+                  <span className="text-[11px] font-semibold text-gray-500">
+                    {item.idealSeason}
                   </span>
                 </div>
 
-                {/* Content */}
-                <div className="p-8">
-                  <h3 className="font-serif text-2xl font-bold text-[#103322] mb-4">
+                {/* Title & Tagline */}
+                <div>
+                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#103322]">
                     {item.title}
                   </h3>
+                  <p className="text-xs text-[#c5a880] font-sans font-bold uppercase tracking-wider mt-1.5">
+                    {item.tagline}
+                  </p>
+                </div>
 
-                  <ul className="space-y-2.5 mb-6 text-sm text-[#4e6359] font-sans">
-                    {item.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2.5">
-                        <span className="flex-shrink-0 w-4 h-4 rounded-full bg-[#103322]/10 text-[#103322] flex items-center justify-center">
-                          <Check size={11} />
-                        </span>
-                        <span>{feature}</span>
+                {/* Route String */}
+                <div className="p-4 rounded-2xl bg-white border border-gray-200/70 font-sans text-xs text-gray-700 leading-relaxed">
+                  <span className="text-[10px] uppercase font-bold text-gray-400 block mb-1">
+                    Route Waypoints
+                  </span>
+                  <span className="font-medium text-[#103322]">{item.route}</span>
+                </div>
+
+                {/* Highlights List */}
+                <div className="space-y-2 font-sans">
+                  <span className="text-xs font-bold text-gray-800 uppercase tracking-wider block">
+                    Key Highlights
+                  </span>
+                  <ul className="space-y-2 text-xs text-gray-600">
+                    {item.highlights.map((h, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <Sparkles size={13} className="text-[#c5a880] shrink-0" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Inclusions */}
+                <div className="space-y-2 font-sans pt-2 border-t border-gray-200/60">
+                  <span className="text-xs font-bold text-gray-800 uppercase tracking-wider block">
+                    Transit Inclusions
+                  </span>
+                  <ul className="space-y-1.5 text-xs text-gray-600">
+                    {item.inclusions.map((inc, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <Check size={13} className="text-emerald-600 shrink-0" />
+                        <span>{inc}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              <div className="p-8 pt-0">
+              {/* Action Buttons */}
+              <div className="pt-6 font-sans space-y-2">
                 <button
-                  onClick={() => handleSelect(item.trackParam)}
-                  className="w-full py-3 px-6 rounded-full border border-[#103322] text-[#103322] hover:bg-[#103322] hover:text-white font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  onClick={() => handleSelectTrack(item)}
+                  className="w-full py-3.5 rounded-full bg-[#103322] hover:bg-[#c5a880] hover:text-[#103322] text-white font-semibold text-xs uppercase tracking-widest transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  Prefill Concierge Form <ArrowRight size={14} />
+                  <span>Inquire This Track</span>
+                  <ArrowRight size={14} />
                 </button>
+
+                <a
+                  href={`https://wa.me/94767885107?text=${encodeURIComponent(
+                    `Hello Himaya Tours & Travels! I would like to book the "${item.title}" itinerary (${item.days}).`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-[#103322] font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors border border-emerald-200"
+                >
+                  <span>Quick WhatsApp Booking</span>
+                </a>
               </div>
-            </article>
+            </motion.div>
           ))}
         </div>
       </div>
