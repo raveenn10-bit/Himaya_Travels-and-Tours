@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 interface HeroExpansionProps {
   onPreFillInquiry?: (service: string, message: string) => void;
@@ -71,7 +71,7 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
       {/* Main Hero Header Content with Scroll Fade */}
       <motion.div
         style={{ opacity: textOpacity, y: textY }}
-        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center mt-6 sm:mt-12"
+        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center mt-6 sm:mt-16"
       >
         {/* Live Verified Chauffeur Badge */}
         <motion.div
@@ -106,45 +106,17 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
-          className="max-w-2xl text-base sm:text-xl text-gray-200/90 font-light leading-relaxed mb-8 drop-shadow-md font-sans"
+          className="max-w-2xl text-base sm:text-xl text-gray-200/90 font-light leading-relaxed mb-6 drop-shadow-md font-sans"
         >
           Curated private driver-guided journeys, pristine climate-controlled fleets, and tailored routes across the misty peaks and golden shores of Sri Lanka.
         </motion.p>
-
-        {/* Dual Primary Call-to-Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mb-8"
-        >
-          <a
-            href="https://wa.me/94767885107"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#103322] hover:bg-[#A7C4A0] hover:text-[#103322] text-[#F4EFE6] border border-[#A7C4A0]/40 font-semibold text-xs uppercase tracking-widest transition-all duration-300 shadow-xl flex items-center justify-center gap-2 group cursor-pointer hover:scale-105 active:scale-95"
-          >
-            <span>WhatsApp Concierge</span>
-            <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
-          </a>
-
-          <button
-            onClick={() => {
-              const el = document.querySelector("#tracks");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md font-semibold text-xs uppercase tracking-widest transition-all duration-300 shadow-lg cursor-pointer hover:scale-105 active:scale-95"
-          >
-            Explore Itineraries
-          </button>
-        </motion.div>
       </motion.div>
 
       {/* Subtle Scroll Down Prompt */}
       <motion.div
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-10 flex flex-col items-center opacity-70"
+        className="relative z-10 flex flex-col items-center opacity-70 mb-4"
       >
         <span className="text-[10px] uppercase tracking-[0.25em] text-[#A7C4A0] font-sans">
           Scroll To Discover
