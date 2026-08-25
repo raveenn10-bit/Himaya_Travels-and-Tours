@@ -96,14 +96,14 @@ export default function Home() {
           prefilledMessage={prefilledMessage}
         />
 
-        {/* Real Customer Experience Gallery with Auto-Scrolling Rails */}
-        <ExperienceGallery />
-
         {/* Guest Logs & Testimonials Infinite Moving Cards */}
         <ReviewsSection />
 
         {/* HQ Contact & Map */}
         <ContactSection />
+
+        {/* Real Customer Experience Gallery with Auto-Scrolling Rails */}
+        <ExperienceGallery />
       </main>
 
       {/* Footer */}

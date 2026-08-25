@@ -166,7 +166,7 @@ export default function Footer() {
           <div className="flex flex-wrap justify-center items-center gap-4">
             <a
               href="tel:+94771882633"
-              className="text-xl md:text-2xl font-serif font-bold text-[#103322] hover:text-[#6C8A66] transition-colors"
+              className="text-2xl md:text-3xl font-serif font-medium italic tracking-wide text-[#103322] hover:text-[#6C8A66] transition-colors"
             >
               +94 77 188 2633
             </a>
@@ -175,7 +175,7 @@ export default function Footer() {
               href="https://wa.me/94767885107"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl md:text-2xl font-serif font-bold text-[#25D366] hover:text-[#103322] transition-colors"
+              className="text-2xl md:text-3xl font-serif font-medium italic tracking-wide text-[#25D366] hover:text-[#103322] transition-colors"
             >
               +94 76 788 5107
             </a>
@@ -199,7 +199,7 @@ export default function Footer() {
         {/* Divider Line */}
         <div className="w-full max-w-4xl h-px bg-[#A7C4A0]/40 mb-8" />
 
-        {/* Copyright & Official URL */}
+        {/* Copyright, Official URL & Developer Credit */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs text-gray-500 font-sans">
           <span>Copyright &copy; 2026 Himaya Tours & Travels. All Rights Reserved.</span>
           <span className="hidden sm:inline text-gray-300">·</span>
@@ -215,6 +215,14 @@ export default function Footer() {
             <Lock size={12} className="text-gray-400" />
             <span>SSL Secured</span>
           </div>
+        </div>
+
+        {/* Developer Credit */}
+        <div className="mt-4 pt-3 text-[11px] text-[#4e6359] font-sans">
+          <span>Crafted with Excellence by </span>
+          <span className="font-bold text-[#103322] tracking-wider uppercase">
+            HARSH APEX DIGITAL SOLUTIONS
+          </span>
         </div>
       </div>
     </footer>
