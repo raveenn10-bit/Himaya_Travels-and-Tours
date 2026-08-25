@@ -42,7 +42,7 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
           </p>
         </ScrollFade>
 
-        {/* 3 Fleet Cards Grid with Scroll Fade In */}
+        {/* 3 Fleet Cards Grid with Studio Cutout Vehicles */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {fleetData.map((item, idx) => (
             <motion.div
@@ -52,24 +52,30 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
               viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               className={`rounded-3xl overflow-hidden bg-white border transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:-translate-y-2 cursor-pointer ${
-                selectedId === item.id ? "border-[#A7C4A0] ring-2 ring-[#A7C4A0]/40 shadow-xl" : "border-gray-200/80"
+                selectedId === item.id ? "border-[#103322] ring-2 ring-[#A7C4A0]/40 shadow-xl" : "border-[#A7C4A0]/30"
               }`}
               onClick={() => setSelectedId(item.id)}
             >
               <div>
-                {/* Vehicle Image */}
-                <div className="relative h-56 w-full overflow-hidden bg-gray-100">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-108"
-                  />
+                {/* Vehicle Showcase Box with Studio Lighting Effect */}
+                <div className="relative h-64 w-full bg-gradient-to-b from-[#F9F7F2] to-white p-6 flex items-center justify-center border-b border-gray-100 overflow-hidden group">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-contain drop-shadow-xl transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+
+                  {/* Category Pill */}
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 rounded-full bg-[#103322]/90 backdrop-blur-md text-[#F4EFE6] text-[11px] font-semibold uppercase tracking-wider font-sans">
                       {item.category}
                     </span>
                   </div>
+
+                  {/* Daily Rate Pill */}
                   <div className="absolute top-4 right-4">
                     <span className="px-3 py-1 rounded-full bg-[#A7C4A0] text-[#103322] text-xs font-bold font-sans shadow-md border border-white/40">
                       {item.ratePerDay}
@@ -83,7 +89,7 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
                     <h3 className="font-serif text-2xl font-bold text-[#103322]">
                       {item.name}
                     </h3>
-                    <p className="text-xs text-gray-500 font-mono pt-1">
+                    <p className="text-xs text-[#6C8A66] font-mono font-medium pt-1">
                       {item.subtitle}
                     </p>
                   </div>

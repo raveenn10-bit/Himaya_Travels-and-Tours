@@ -169,13 +169,13 @@ export const fleetData: FleetItem[] = [
   {
     id: "prestige-sedan",
     name: "Prestige Luxury Sedan",
-    subtitle: "Toyota Allion / Premio / Axio / Honda Grace",
+    subtitle: "Toyota Prius / Allion / Premio / Axio Hybrid",
     category: "Couples & Solo Explorers",
     capacity: "1 - 3 Passengers",
     luggage: "2 Large + 2 Cabin Bags",
     ratePerDay: "$45 - $55 / Day",
     idealFor: "Airport Pickups, Romantic Getaways & Business Travel",
-    image: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=800&auto=format&fit=crop",
+    image: "/Assets/fleet-prius-sedan.png",
     features: [
       "Dual Climate Control AC",
       "Plush Leather Reclining Seats",
@@ -195,7 +195,7 @@ export const fleetData: FleetItem[] = [
     luggage: "6 Large + 5 Cabin Bags",
     ratePerDay: "$65 - $80 / Day",
     idealFor: "Family Round Tours, Island Expeditions & Surf Trips",
-    image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop",
+    image: "/Assets/fleet-kdh-van.png",
     features: [
       "Individual High-Back Velvet/Leather Recliners",
       "Overhead Dual AC Vents per Row",
@@ -209,13 +209,13 @@ export const fleetData: FleetItem[] = [
   {
     id: "signature-coach",
     name: "Signature Event Mini Coach",
-    subtitle: "Toyota Coaster / Rosa VIP Luxury Coach",
+    subtitle: "Toyota Coaster VIP Luxury Coach",
     category: "Corporate & Event Groups",
     capacity: "9 - 22 Passengers",
     luggage: "20+ Large Luggage",
     ratePerDay: "Custom Bespoke Quote",
     idealFor: "Destination Weddings, Corporate Retreats & Large Delegations",
-    image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=800&auto=format&fit=crop",
+    image: "/Assets/fleet-coaster-coach.png",
     features: [
       "Ergonomic VIP Air-Suspension Seats",
       "PA System & Onboard Entertainment",
