@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
@@ -8,9 +8,15 @@ interface HeroExpansionProps {
   onPreFillInquiry?: (service: string, message: string) => void;
 }
 
+const HERO_VIDEOS = [
+  { src: "/Assets/srilanka.mp4", poster: "/Assets/geo-sigiriya.jpg" },
+  { src: "/Assets/hero 2.mp4", poster: "/Assets/geo-ella.jpg" },
+];
+
 export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -21,19 +27,26 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
   const textOpacity = useTransform(scrollYProgress, [0, 0.45, 0.8], [1, 0.8, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.8], [0, -60]);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.playbackRate = 1.5;
-      video.play().catch(() => {});
-    }
-  }, []);
-
-  const handleVideoLoaded = () => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 1.5;
+  // Handle sequential video transition
+  const handleVideoEnded = (index: number) => {
+    const nextIndex = (index + 1) % HERO_VIDEOS.length;
+    setActiveVideoIndex(nextIndex);
+    const nextVideo = videoRefs[nextIndex].current;
+    if (nextVideo) {
+      nextVideo.currentTime = 0;
+      nextVideo.playbackRate = 1.5;
+      nextVideo.play().catch(() => {});
     }
   };
+
+  useEffect(() => {
+    // Set 1.5x speed on the active video
+    const currentVideo = videoRefs[activeVideoIndex].current;
+    if (currentVideo) {
+      currentVideo.playbackRate = 1.5;
+      currentVideo.play().catch(() => {});
+    }
+  }, [activeVideoIndex]);
 
   return (
     <section
@@ -41,25 +54,28 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
       className="relative min-h-[90vh] lg:min-h-[95vh] flex flex-col justify-between items-center text-white overflow-hidden pt-32 pb-16 bg-[#121614]"
       id="hero-container"
     >
-      {/* Single Background Video at 1.5x Speed in Seamless Loop */}
+      {/* Background Videos with Smooth Cross-fade and Scroll-Linked Scale */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
         style={{ scale: videoScale }}
       >
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/Assets/geo-sigiriya.jpg"
-          onLoadedData={handleVideoLoaded}
-          onCanPlay={handleVideoLoaded}
-          className="absolute inset-0 w-full h-full object-cover filter brightness-[0.75] contrast-[1.08] saturate-110"
-        >
-          <source src="/Assets/srilanka.mp4" type="video/mp4" />
-        </video>
+        {HERO_VIDEOS.map((item, idx) => (
+          <video
+            key={item.src}
+            ref={videoRefs[idx]}
+            autoPlay={idx === 0}
+            muted
+            playsInline
+            preload={idx === 0 ? "auto" : "metadata"}
+            poster={item.poster}
+            onEnded={() => handleVideoEnded(idx)}
+            className={`absolute inset-0 w-full h-full object-cover filter brightness-[0.75] contrast-[1.08] saturate-110 transition-opacity duration-1000 ease-in-out ${
+              activeVideoIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          >
+            <source src={item.src} type="video/mp4" />
+          </video>
+        ))}
 
         {/* Luxury Vignette & Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#121614] via-black/40 to-black/60 pointer-events-none z-20" />
