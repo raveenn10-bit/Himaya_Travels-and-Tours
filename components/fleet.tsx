@@ -15,7 +15,7 @@ export interface FleetProps {
 export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
   const [selectedId, setSelectedId] = useState<string>(fleetData[0].id);
 
-  const loopFleet = [...fleetData, ...fleetData, ...fleetData];
+  const loopFleet = [...fleetData, ...fleetData];
 
   const handleBookFleet = (item: FleetItem) => {
     if (onSelectFleet) {
@@ -145,16 +145,16 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
         </div>
       </div>
 
-      {/* Mobile View: Smooth Horizontal Auto-scroll Left-to-Right */}
+      {/* Mobile View: Starts from 1st Card and auto-scrolls through to the last card, seamlessly looping */}
       <div className="block lg:hidden relative w-full overflow-hidden py-2">
         <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#F4EFE6] to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#F4EFE6] to-transparent z-10" />
 
         <motion.div
-          animate={{ x: ["-50%", "0%"] }}
+          animate={{ x: ["0%", "-50%"] }}
           transition={{
             ease: "linear",
-            duration: 26,
+            duration: 20,
             repeat: Infinity,
           }}
           className="flex gap-4 w-max px-4"
