@@ -222,6 +222,8 @@ export default function RootLayout({
     >
       <head>
         <link rel="canonical" href="https://himayatoursandtravels.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
