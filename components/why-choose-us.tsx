@@ -38,10 +38,10 @@ export default function WhyChooseUs() {
           {/* Left Column: Content & 3 Feature Points */}
           <ScrollFade direction="right" className="lg:col-span-6 space-y-8">
             <div>
-              <span className="text-sm font-bold uppercase tracking-[0.25em] text-[#6C8A66] block mb-2 font-sans">
+              <span className="section-kicker text-[#6C8A66] mb-4">
                 Why Choose
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#103322] leading-tight">
+              <h2 className="type-modern text-[#103322]">
                 Travel with Harsha for Your Sri Lankan Journey?
               </h2>
             </div>

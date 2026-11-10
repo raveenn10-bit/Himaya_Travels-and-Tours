@@ -129,10 +129,10 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
           initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.08] mb-6 drop-shadow-2xl"
+          className="type-hero text-white mb-7 drop-shadow-2xl"
         >
           Welcome To <br />
-          <span className="italic font-normal font-serif text-transparent bg-clip-text bg-gradient-to-r from-[#F4EFE6] via-[#A7C4A0] to-[#6C8A66]">
+          <span className="type-hero-accent text-transparent bg-clip-text bg-gradient-to-r from-[#F4EFE6] via-[#A7C4A0] to-[#6C8A66]">
             Ceylon
           </span>
         </motion.h1>
@@ -142,7 +142,7 @@ export default function HeroExpansion({ onPreFillInquiry }: HeroExpansionProps) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
-          className="max-w-2xl text-base sm:text-xl text-gray-200/90 font-light leading-relaxed mb-6 drop-shadow-md font-sans"
+          className="section-lede max-w-2xl text-gray-200/90 mb-6 drop-shadow-md"
         >
           Curated private driver-guided journeys, pristine climate-controlled fleets, and tailored routes across the misty peaks and golden shores of Sri Lanka.
         </motion.p>

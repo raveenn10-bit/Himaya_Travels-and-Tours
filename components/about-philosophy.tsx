@@ -38,13 +38,13 @@ export default function AboutPhilosophy() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Header with Scroll Fade */}
         <ScrollFade direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#A7C4A0] block mb-3 font-sans">
+          <span className="section-kicker text-[#A7C4A0] mb-4">
             Our Heritage & Standards
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold tracking-tight text-white">
+          <h2 className="type-signature text-white">
             The Himaya Philosophy
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#F4EFE6]/90 leading-relaxed font-sans font-light">
+          <p className="section-lede mt-5 text-[#F4EFE6]/90">
             Rooted in Galle and operating island-wide, Himaya Tours & Travels blends ancient Ceylon hospitality with uncompromising modern luxury transit.
           </p>
         </ScrollFade>

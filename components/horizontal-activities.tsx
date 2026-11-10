@@ -104,13 +104,13 @@ export default function HorizontalActivities({ onSelectActivity }: ActivitiesPro
         {/* Header with Scroll Fade */}
         <ScrollFade direction="up" className="flex flex-col md:flex-row md:items-end justify-between mb-14 max-w-4xl">
           <div>
-            <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#6C8A66] block mb-3 font-sans">
+            <span className="section-kicker text-[#6C8A66] mb-4">
               Signature Encounters
             </span>
-            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+            <h2 className="type-cinematic text-[#103322]">
               Cinematic Ceylon Moments
             </h2>
-            <p className="mt-4 text-base text-[#4e6359] leading-relaxed font-sans font-light">
+            <p className="section-lede mt-5 text-[#4e6359]">
               Experience the untamed beauty of Sri Lanka through private video-guided passages led by your dedicated chauffeur-guide.
             </p>
           </div>

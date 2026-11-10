@@ -40,10 +40,10 @@ export default function ExperienceGallery() {
               Real On-Road Travel Proof
             </span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+          <h2 className="type-cinematic text-[#103322]">
             Moments from Our Private Expeditions
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans font-light">
+          <p className="section-lede mt-5 mx-auto text-[#4e6359]">
             Every journey with Himaya Tours & Travels is genuine. Explore real moments, smiling international guests, and unforgettable Sri Lankan landscapes safely guided by our team.
           </p>
         </ScrollFade>

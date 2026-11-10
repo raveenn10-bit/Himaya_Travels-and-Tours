@@ -129,13 +129,13 @@ export default function Destinations({ onSelectDestination }: DestinationsProps)
         {/* Section Header with Scroll Fade */}
         <ScrollFade direction="up" className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div className="max-w-2xl">
-            <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#6C8A66] block mb-3 font-sans">
+            <span className="section-kicker text-[#6C8A66] mb-4">
               Curated Geography
             </span>
-            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+            <h2 className="type-editorial text-[#103322]">
               Regions & Sacred Landscapes
             </h2>
-            <p className="mt-4 text-base text-[#4e6359] leading-relaxed font-sans font-light">
+            <p className="section-lede mt-5 text-[#4e6359]">
               From the colossal stone citadels of the dry zone to cloud-kissed tea estates and pristine southern coasts, explore Ceylon in private luxury.
             </p>
           </div>

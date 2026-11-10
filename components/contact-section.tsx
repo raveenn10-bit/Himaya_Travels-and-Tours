@@ -31,13 +31,13 @@ export default function ContactSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Scroll Fade */}
         <ScrollFade direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#6C8A66] block mb-3 font-sans">
+          <span className="section-kicker text-[#6C8A66] mb-4">
             Direct Concierge Desk
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+          <h2 className="type-editorial text-[#103322]">
             Connect & Plan Your Voyage
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans font-light">
+          <p className="section-lede mt-5 text-[#4e6359]">
             Headquartered on Udugama Road in Galle and operating seamlessly across the island. Reach us 24/7 for immediate itinerary planning and instant chauffeur bookings.
           </p>
         </ScrollFade>

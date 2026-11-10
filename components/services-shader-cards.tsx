@@ -152,13 +152,13 @@ export default function ServicesShaderCards({
         {/* Section Header with Scroll Fade */}
         <ScrollFade direction="up" className="flex flex-col md:flex-row md:items-end justify-between mb-16">
           <div className="max-w-2xl">
-            <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#6C8A66] block mb-3 font-sans">
+            <span className="section-kicker text-[#6C8A66] mb-4">
               Bespoke Transit Capabilities
             </span>
-            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+            <h2 className="type-editorial text-[#103322]">
               Curated Chauffeur Offerings
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans font-light">
+            <p className="section-lede mt-5 text-[#4e6359]">
               Fully customizable private chauffeur services tailored to the highest standards of safety, comfort, and punctual luxury.
             </p>
           </div>

@@ -111,10 +111,10 @@ export default function ReviewsSection() {
             <ShieldCheck size={14} className="text-[#6C8A66]" />
             <span className="uppercase tracking-widest text-[10px] font-sans font-bold">100% Verified Guest Logs</span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+          <h2 className="type-signature text-[#103322]">
             Loved by Travelers Worldwide
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans font-light">
+          <p className="section-lede mt-5 mx-auto text-[#4e6359]">
             Discover unfiltered impressions from international couples, families, and solo explorers who journeyed across Sri Lanka with Himaya Tours & Travels.
           </p>
         </ScrollFade>

@@ -118,13 +118,13 @@ export default function Itineraries({ onSelectTrack }: ItinerariesProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Scroll Fade */}
         <ScrollFade direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#c5a880] block mb-3 font-sans">
+          <span className="section-kicker text-[#9f7d50] mb-4">
             Suggested Expeditions
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+          <h2 className="type-cinematic text-[#103322]">
             Curated Sri Lanka Tracks
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans font-light">
+          <p className="section-lede mt-5 text-[#4e6359]">
             Flexible private driver journeys tailored to your rhythm. Customize stops, accommodations, and durations with our 24/7 concierge team.
           </p>
         </ScrollFade>

@@ -67,13 +67,13 @@ export default function BookingDeck({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Interactive Concierge & Live Estimator with Scroll Fade */}
           <ScrollFade direction="right" className="lg:col-span-5 space-y-6">
-            <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#6C8A66] block font-sans">
+            <span className="section-kicker text-[#6C8A66]">
               Bespoke Coordination
             </span>
-            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] leading-tight">
+            <h2 className="type-modern text-[#103322]">
               Design Your Private Expedition
             </h2>
-            <p className="text-[#4e6359] text-base leading-relaxed font-sans font-light">
+            <p className="section-lede text-[#4e6359]">
               Submit your preferred travel dates and party size. Our Galle coordination desk provides a transparent, fixed quote with all expressway tolls, fuel, and chauffeur services included.
             </p>
 

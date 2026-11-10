@@ -128,13 +128,13 @@ export default function Fleet({ onSelectFleet, onSelectVehicle }: FleetProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Scroll Fade */}
         <ScrollFade direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs uppercase tracking-[0.3em] font-bold text-[#6C8A66] block mb-3 font-sans">
+          <span className="section-kicker text-[#6C8A66] mb-4">
             Private Luxury Transport
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#103322] tracking-tight">
+          <h2 className="type-modern text-[#103322]">
             Our Maintained Fleet
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#4e6359] leading-relaxed font-sans font-light">
+          <p className="section-lede mt-5 text-[#4e6359]">
             Every vehicle in the Himaya fleet is pristine, climate-controlled, equipped with onboard Wi-Fi, and piloted by a certified English-speaking private driver.
           </p>
         </ScrollFade>
